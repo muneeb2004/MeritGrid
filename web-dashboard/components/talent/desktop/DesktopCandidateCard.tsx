@@ -26,27 +26,29 @@ export default function DesktopCandidateCard({
 }: DesktopCandidateCardProps) {
   return (
     <div className="group bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-5 shadow-sm hover:shadow-md hover:border-primary/50 transition-all duration-300 relative">
-      <div
-        className={`absolute top-4 right-4 ${matchColorClass} px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1`}
-      >
-        <span className="material-symbols-outlined text-[14px]">bolt</span>
-        {matchScore}% Match
-      </div>
-      <div className="flex items-start gap-4 mb-4">
-        <div className="size-14 rounded-full bg-slate-200 overflow-hidden shrink-0 border-2 border-white dark:border-slate-700 shadow-sm">
-          <img
-            alt={`Portrait of ${name}`}
-            className="w-full h-full object-cover"
-            src={imageUrl}
-          />
+      <div className="flex justify-between items-start gap-3 mb-4">
+        <div className="flex items-start gap-4">
+          <div className="size-14 rounded-full bg-slate-200 overflow-hidden shrink-0 border-2 border-white dark:border-slate-700 shadow-sm">
+            <img
+              alt={`Portrait of ${name}`}
+              className="w-full h-full object-cover"
+              src={imageUrl}
+            />
+          </div>
+          <div className="pt-1 min-w-0">
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors truncate">
+              {name}
+            </h3>
+            <p className="text-sm text-slate-500 dark:text-slate-400 truncate">
+              {role} • {university} &apos;{year}
+            </p>
+          </div>
         </div>
-        <div className="pt-1">
-          <h3 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
-            {name}
-          </h3>
-          <p className="text-sm text-slate-500 dark:text-slate-400">
-            {role} • {university} '{year}
-          </p>
+        <div
+          className={`${matchColorClass} px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 shrink-0 whitespace-nowrap`}
+        >
+          <span className="material-symbols-outlined text-[14px]">bolt</span>
+          {matchScore}% Match
         </div>
       </div>
       <div className="flex flex-wrap gap-2 mb-6">

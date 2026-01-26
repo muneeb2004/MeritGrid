@@ -51,14 +51,14 @@ export default function CandidateCard({
               <div className="absolute bottom-0 right-0 size-4 bg-green-500 border-2 border-white dark:border-surface-dark rounded-full"></div>
             )}
           </div>
-          <div>
-            <h3 className="text-base font-bold text-[#111318] dark:text-white leading-tight">
+          <div className="min-w-0">
+            <h3 className="text-base font-bold text-[#111318] dark:text-white leading-tight truncate">
               {name}
             </h3>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 font-medium">
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 font-medium truncate">
               {year}
             </p>
-            <p className="text-xs text-primary font-bold mt-0.5">
+            <p className="text-xs text-primary font-bold mt-0.5 truncate">
               {university}
             </p>
           </div>
