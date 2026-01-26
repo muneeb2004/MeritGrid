@@ -21,7 +21,7 @@ export default function ScholarshipApplicationPage() {
         </div>
       </header>
 
-      <main className="flex-1 flex flex-col max-w-md mx-auto w-full">
+      <main className="flex-1 flex flex-col max-w-md md:max-w-3xl mx-auto w-full">
         {/* Header Info */}
         <div className="px-4 pt-6">
           <h1 className="text-[#0d101b] dark:text-white text-2xl font-bold tracking-tight">
@@ -133,7 +133,7 @@ export default function ScholarshipApplicationPage() {
              Since max-w-md mx-auto is used for main content, the footer should probably match or be screen width.
              If StudentLayout wraps this, the footer might be obscured by or obscure the BottomNav.
              We'll keep it fixed bottom. */}
-          <div className="max-w-md mx-auto">
+          <div className="max-w-md md:max-w-3xl mx-auto">
             <button className="w-full bg-primary text-white py-4 rounded-xl font-bold text-lg shadow-lg shadow-primary/20 active:scale-[0.98] transition-transform cursor-pointer hover:bg-primary/90">
               Next Step
             </button>
