@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import InterviewPage from "./InterviewPage";
 import DesktopInterviewInsights from "./DesktopInterviewInsights";
