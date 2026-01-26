@@ -85,12 +85,12 @@ export default function KanbanCard({
           <span className="material-symbols-outlined text-lg">more_horiz</span>
         </button>
       </div>
-      <div className="flex items-center gap-1.5 mb-3">
+      <div className={`inline-flex items-center gap-1.5 mb-3 px-2 py-1 rounded-md ${offer ? "bg-green-50 dark:bg-green-900/20" : matchColorClass}`}>
         <span
           className={`material-symbols-outlined ${
-             offer ? "text-green-600" : matchTextColorClass.replace("text-", "text-") // simplify 
+             offer ? "text-green-600" : matchTextColorClass 
           } text-base`}
-          style={{ color: offer ? undefined : "inherit" }} // let class handle it? specific text color class usually handles it.
+          style={{ fontSize: "16px" }}
         >
           auto_awesome
         </span>

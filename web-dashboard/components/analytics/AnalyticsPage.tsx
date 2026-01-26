@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Sidebar from "@/components/Sidebar";
 import KPIGrid from "./KPIGrid";
 import RecruitmentVelocityChart from "./RecruitmentVelocityChart";
@@ -6,15 +8,25 @@ import DiversityChart from "./DiversityChart";
 import Link from "next/link";
 
 export default function AnalyticsPage() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
     <div className="flex h-screen w-full bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white overflow-hidden">
-      <Sidebar />
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       <div className="flex flex-col flex-1 h-full min-w-0 overflow-hidden">
         {/* Top Navigation / Header */}
-        <header className="sticky top-0 z-50 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
-          <div className="px-6 lg:px-8 py-3 flex items-center justify-between">
-            <div className="flex items-center gap-8">
-               <h2 className="text-lg font-bold leading-tight tracking-[-0.015em] hidden md:block">RecruitAI</h2>
+        <header className="sticky top-0 z-40 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+          <div className="px-4 lg:px-8 py-3 flex items-center justify-between">
+            <div className="flex items-center gap-4 md:gap-8">
+               {/* Mobile Menu Button */}
+               <button 
+                 className="md:hidden p-2 -ml-2 text-slate-500 hover:text-primary transition-colors"
+                 onClick={() => setSidebarOpen(true)}
+               >
+                 <span className="material-symbols-outlined">menu</span>
+               </button>
+
+               <h2 className="text-lg font-bold leading-tight tracking-[-0.015em] block">RecruitAI</h2>
               <nav className="hidden md:flex items-center gap-6">
                 <Link
                   className="text-slate-500 hover:text-primary dark:text-gray-400 dark:hover:text-white text-sm font-medium transition-colors"
@@ -60,10 +72,10 @@ export default function AnalyticsPage() {
         </header>
 
         {/* Main Content */}
-        <main className="flex-1 w-full max-w-[1600px] mx-auto p-6 lg:p-8 overflow-y-auto">
+        <main className="flex-1 w-full max-w-[1600px] mx-auto p-4 lg:p-8 overflow-y-auto">
           <div className="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
              <div>
-                <h1 className="text-3xl font-bold text-[#0d121b] dark:text-white mb-2">
+                <h1 className="text-2xl md:text-3xl font-bold text-[#0d121b] dark:text-white mb-2">
                   Recruitment Analytics
                 </h1>
                 <p className="text-slate-500 dark:text-slate-400 text-sm">
@@ -71,7 +83,7 @@ export default function AnalyticsPage() {
                 </p>
              </div>
              <div className="flex gap-3">
-                <button className="px-4 py-2 bg-white dark:bg-gray-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 flex items-center gap-2 cursor-pointer">
+                <button className="px-4 py-2 bg-white dark:bg-gray-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 flex items-center gap-2 cursor-pointer w-full sm:w-auto justify-center">
                     <span className="material-symbols-outlined" style={{fontSize: '18px'}}>download</span>
                     Export Report
                 </button>
@@ -81,10 +93,10 @@ export default function AnalyticsPage() {
           <KPIGrid />
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-            <div className="lg:col-span-2 h-96">
+            <div className="lg:col-span-2 h-80 md:h-96">
                 <RecruitmentVelocityChart />
             </div>
-            <div className="h-96">
+            <div className="h-80 md:h-96">
                  <DiversityChart />
             </div>
           </div>
@@ -93,3 +105,4 @@ export default function AnalyticsPage() {
     </div>
   );
 }
+
