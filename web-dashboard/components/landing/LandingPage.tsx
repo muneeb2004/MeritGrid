@@ -47,6 +47,12 @@ export default function LandingPage() {
               </Link>
             </nav>
             <div className="flex items-center gap-4">
+              <Link 
+                className="hidden md:block text-sm font-medium text-gray-600 hover:text-primary dark:text-gray-300 transition-colors"
+                href="/student"
+              >
+                Student Portal
+              </Link>
               <button className="hidden md:block text-sm font-medium text-gray-600 hover:text-primary dark:text-gray-300">
                 Log in
               </button>

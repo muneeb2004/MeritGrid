@@ -12,8 +12,12 @@
   --navy: #0a192f;
   --surface-light: #ffffff;
   --surface-dark: #1a2233;
+  --card-light: #ffffff;
+  --card-dark: #2d2438;
   --text-main: #0d121b;
   --text-muted: #4c669a;
+  --separator-light: #c6c6c8;
+  --separator-dark: #38383a;
   --success: #07883b;
 }
 
@@ -35,8 +39,12 @@
   --color-background-dark: var(--background-dark);
   --color-surface-light: var(--surface-light);
   --color-surface-dark: var(--surface-dark);
+  --color-card-light: var(--card-light);
+  --color-card-dark: var(--card-dark);
   --color-text-main: var(--text-main);
   --color-text-muted: var(--text-muted);
+  --color-separator-light: var(--separator-light);
+  --color-separator-dark: var(--separator-dark);
   --color-success: var(--success);
   --font-sans: var(--font-lexend);
   --font-mono: var(--font-geist-mono);
@@ -91,4 +99,18 @@ body {
       background-image: radial-gradient(circle, #1e293b 1px, transparent 1px);
     }
   }
-}
+  .geometric-bg {
+    background-color: var(--background-light);
+    background-image: radial-gradient(rgb(17 115 212 / 0.06) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  @media (prefers-color-scheme: dark) {
+    .geometric-bg {
+        background-color: var(--background-dark);
+        background-image: radial-gradient(rgb(255 255 255 / 0.02) 1px, transparent 1px);
+  @media (prefers-color-scheme: dark) {
+    .geometric-bg {
+        background-color: var(--background-dark);
+        background-image: radial-gradient(rgb(255 255 255 / 0.02) 1px, transparent 1px);
+    }
+  }
