@@ -76,6 +76,17 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             </Link>
           </div>
           <Link
+            href="/offers"
+            className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-slate-800 transition-colors text-slate-300 group"
+          >
+           <span className="material-symbols-outlined group-hover:text-white">
+              dataset
+            </span>
+            <span className="text-sm font-medium group-hover:text-white">
+              Offers
+            </span>
+          </Link>
+          <Link
             href="/analytics"
             className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-slate-800 transition-colors text-slate-300 group"
           >
