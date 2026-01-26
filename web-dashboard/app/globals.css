@@ -108,9 +108,6 @@ body {
     .geometric-bg {
         background-color: var(--background-dark);
         background-image: radial-gradient(rgb(255 255 255 / 0.02) 1px, transparent 1px);
-  @media (prefers-color-scheme: dark) {
-    .geometric-bg {
-        background-color: var(--background-dark);
-        background-image: radial-gradient(rgb(255 255 255 / 0.02) 1px, transparent 1px);
     }
   }
+}
