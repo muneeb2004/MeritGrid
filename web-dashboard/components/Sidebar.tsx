@@ -30,7 +30,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           </div>
           <div className="flex flex-col">
             <h1 className="text-white text-base font-bold leading-tight tracking-wide">
-              Recruit AI
+              MeritGrid
             </h1>
             <p className="text-slate-400 text-xs font-medium">
               University Dashboard

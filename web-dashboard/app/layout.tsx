@@ -25,8 +25,8 @@ const lexend = Lexend({
 });
 
 export const metadata: Metadata = {
-  title: "Talent Scout",
-  description: "AI Recruitment Search Results",
+  title: "MeritGrid | AI Recruitment",
+  description: "AI-Powered Recruitment Dashboard",
 };
 
 export default function RootLayout({

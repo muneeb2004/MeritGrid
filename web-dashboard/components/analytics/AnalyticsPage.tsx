@@ -26,7 +26,7 @@ export default function AnalyticsPage() {
                  <span className="material-symbols-outlined">menu</span>
                </button>
 
-               <h2 className="text-lg font-bold leading-tight tracking-[-0.015em] block">RecruitAI</h2>
+               <h2 className="text-lg font-bold leading-tight tracking-[-0.015em] block">MeritGrid</h2>
               <nav className="hidden md:flex items-center gap-6">
                 <Link
                   className="text-slate-500 hover:text-primary dark:text-gray-400 dark:hover:text-white text-sm font-medium transition-colors"

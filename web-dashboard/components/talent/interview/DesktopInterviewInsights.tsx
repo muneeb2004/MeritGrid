@@ -18,7 +18,7 @@ export default function DesktopInterviewInsights() {
         <header className="sticky top-0 z-50 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
           <div className="px-6 lg:px-8 py-3 flex items-center justify-between">
             <div className="flex items-center gap-8">
-               <h2 className="text-lg font-bold leading-tight tracking-[-0.015em] hidden md:block">RecruitAI</h2>
+               <h2 className="text-lg font-bold leading-tight tracking-[-0.015em] hidden md:block">MeritGrid</h2>
               <nav className="hidden md:flex items-center gap-6">
                 <a
                   className="text-slate-500 hover:text-primary dark:text-gray-400 dark:hover:text-white text-sm font-medium transition-colors"
