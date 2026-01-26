@@ -188,7 +188,6 @@ export default function NotificationsPage() {
           </div>
         </div>
       </div>
-      </div>
 
       {/* Bottom Tab Bar (iOS Style) */}
       <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 z-50 flex h-20 w-full max-w-[430px] items-center justify-around border-t border-slate-100 dark:border-slate-800 bg-white/90 dark:bg-background-dark/90 ios-blur px-6 pb-4">
