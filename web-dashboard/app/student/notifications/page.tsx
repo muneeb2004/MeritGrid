@@ -1,4 +1,3 @@
-import Link from "next/link";
 import React from "react";
 
 export default function NotificationsPage() {
@@ -7,13 +6,7 @@ export default function NotificationsPage() {
       <div className="max-w-lg mx-auto min-h-screen relative flex flex-col pb-24">
         {/* TopAppBar */}
         <div className="flex flex-col gap-2 bg-background-light dark:bg-background-dark p-4 pb-2 sticky top-0 z-10 transition-colors duration-300">
-          <div className="flex items-center h-10 justify-between">
-            <Link
-              href="/student/dashboard"
-              className="flex items-center justify-center size-10 -ml-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-slate-500 dark:text-slate-400 transition-colors"
-            >
-              <span className="material-symbols-outlined">arrow_back</span>
-            </Link>
+          <div className="flex items-center h-10 justify-end">
             <button className="flex items-center justify-end group cursor-pointer">
               <p className="text-primary text-base font-semibold leading-normal tracking-[0.015em] shrink-0 group-hover:opacity-80 transition-opacity">
                 Mark all read
@@ -32,7 +25,7 @@ export default function NotificationsPage() {
             <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-yellow-200/50 dark:bg-yellow-600/10 rounded-full blur-2xl"></div>
             <div className="relative w-full p-5 flex flex-col gap-3">
               <div className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-amber-500 text-2xl fill-1" style={{ fontVariationSettings: "'FILL' 1" }}>
+                <span className="material-symbols-outlined text-amber-500 text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>
                   stars
                 </span>
                 <p className="text-amber-700 dark:text-amber-200 text-xs font-bold uppercase tracking-wider">
@@ -93,6 +86,7 @@ export default function NotificationsPage() {
               </div>
             </div>
           </div>
+
           {/* ListItem 2 */}
           <div className="group flex flex-col bg-white dark:bg-[#1e2130] rounded-xl shadow-sm border border-gray-100 dark:border-gray-800/50 overflow-hidden active:bg-gray-50 dark:active:bg-[#25283a] transition-colors cursor-pointer">
             <div className="flex items-start gap-4 p-4 justify-between">
@@ -112,8 +106,8 @@ export default function NotificationsPage() {
                     </p>
                   </div>
                   <p className="text-[#4c599a] dark:text-gray-400 text-sm font-normal leading-relaxed line-clamp-2">
-                    Habib University updated your status regarding the scholarship
-                    grant.
+                    Habib University updated your status regarding the
+                    scholarship grant.
                   </p>
                 </div>
               </div>
@@ -160,6 +154,7 @@ export default function NotificationsPage() {
               </div>
             </div>
           </div>
+
           {/* ListItem 4 */}
           <div className="group flex flex-col bg-white dark:bg-[#1e2130] rounded-xl shadow-sm border border-gray-100 dark:border-gray-800/50 overflow-hidden active:bg-gray-50 dark:active:bg-[#25283a] transition-colors cursor-pointer">
             <div className="flex items-start gap-4 p-4 justify-between">
@@ -179,8 +174,8 @@ export default function NotificationsPage() {
                     </p>
                   </div>
                   <p className="text-[#4c599a] dark:text-gray-400 text-sm font-normal leading-relaxed line-clamp-2">
-                    New scholarship opportunities have been added for engineering
-                    students.
+                    New scholarship opportunities have been added for
+                    engineering students.
                   </p>
                 </div>
               </div>
@@ -188,8 +183,6 @@ export default function NotificationsPage() {
           </div>
         </div>
       </div>
-
-
     </div>
   );
 }
