@@ -66,12 +66,14 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             <span className="material-symbols-outlined group-hover:text-white">
               chat_bubble
             </span>
-            <span className="text-sm font-medium group-hover:text-white">
-              Messages
-            </span>
-            <span className="ml-auto bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
-              4
-            </span>
+            <Link href="/messages" className="flex-1 flex items-center justify-between">
+                <span className="text-sm font-medium group-hover:text-white">
+                Messages
+                </span>
+                <span className="bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                4
+                </span>
+            </Link>
           </div>
           <Link
             href="/analytics"
