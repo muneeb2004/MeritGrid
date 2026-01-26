@@ -2,7 +2,7 @@ import React from "react";
 
 export default function NotificationsPage() {
   return (
-    <div className="bg-background-light dark:bg-background-dark font-display text-[#0d101b] dark:text-white antialiased overflow-x-hidden min-h-screen">
+    <div className="bg-background-light dark:bg-background-dark font-display text-text-main dark:text-white antialiased overflow-x-hidden min-h-screen">
       <div className="max-w-3xl mx-auto min-h-screen relative flex flex-col pb-24">
         {/* TopAppBar */}
         <div className="flex flex-col gap-2 bg-background-light dark:bg-background-dark p-4 pb-2 sticky top-0 z-10 transition-colors duration-300">
@@ -13,7 +13,7 @@ export default function NotificationsPage() {
               </p>
             </button>
           </div>
-          <h1 className="text-[#0d101b] dark:text-white tracking-tight text-[32px] font-bold leading-tight">
+          <h1 className="text-text-main dark:text-white tracking-tight text-[32px] font-bold leading-tight">
             Notifications
           </h1>
         </div>
@@ -33,7 +33,7 @@ export default function NotificationsPage() {
                 </p>
               </div>
               <div className="flex flex-col gap-1">
-                <p className="text-[#0d101b] dark:text-white text-lg font-bold leading-snug tracking-[-0.015em]">
+                <p className="text-text-main dark:text-white text-lg font-bold leading-snug tracking-[-0.015em]">
                   Alpha College invites you to apply for the CS Program!
                 </p>
               </div>
@@ -48,7 +48,7 @@ export default function NotificationsPage() {
 
         {/* Section Header: New */}
         <div className="px-4 pb-2 pt-2">
-          <h3 className="text-[#0d101b] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">
+          <h3 className="text-text-main dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">
             New
           </h3>
         </div>
@@ -67,14 +67,14 @@ export default function NotificationsPage() {
                 </div>
                 <div className="flex flex-col justify-center gap-0.5 w-full">
                   <div className="flex justify-between items-start w-full gap-2">
-                    <p className="text-[#0d101b] dark:text-white text-sm font-semibold leading-normal line-clamp-1">
+                    <p className="text-text-main dark:text-white text-sm font-semibold leading-normal line-clamp-1">
                       IBA Admissions
                     </p>
-                    <p className="text-[#4c599a] dark:text-gray-400 text-xs font-normal leading-normal shrink-0">
+                    <p className="text-text-muted dark:text-gray-400 text-xs font-normal leading-normal shrink-0">
                       2h ago
                     </p>
                   </div>
-                  <p className="text-[#4c599a] dark:text-gray-400 text-sm font-normal leading-relaxed line-clamp-2">
+                  <p className="text-text-muted dark:text-gray-400 text-sm font-normal leading-relaxed line-clamp-2">
                     Your application to IBA was viewed by the admissions
                     committee.
                   </p>
@@ -98,14 +98,14 @@ export default function NotificationsPage() {
                 </div>
                 <div className="flex flex-col justify-center gap-0.5 w-full">
                   <div className="flex justify-between items-start w-full gap-2">
-                    <p className="text-[#0d101b] dark:text-white text-sm font-semibold leading-normal line-clamp-1">
+                    <p className="text-text-main dark:text-white text-sm font-semibold leading-normal line-clamp-1">
                       Habib University
                     </p>
-                    <p className="text-[#4c599a] dark:text-gray-400 text-xs font-normal leading-normal shrink-0">
+                    <p className="text-text-muted dark:text-gray-400 text-xs font-normal leading-normal shrink-0">
                       5h ago
                     </p>
                   </div>
-                  <p className="text-[#4c599a] dark:text-gray-400 text-sm font-normal leading-relaxed line-clamp-2">
+                  <p className="text-text-muted dark:text-gray-400 text-sm font-normal leading-relaxed line-clamp-2">
                     Habib University updated your status regarding the
                     scholarship grant.
                   </p>
@@ -121,7 +121,7 @@ export default function NotificationsPage() {
 
         {/* Section Header: Earlier */}
         <div className="px-4 pb-2 pt-6">
-          <h3 className="text-[#0d101b] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">
+          <h3 className="text-text-main dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">
             Earlier
           </h3>
         </div>
@@ -139,14 +139,14 @@ export default function NotificationsPage() {
                 </div>
                 <div className="flex flex-col justify-center gap-0.5 w-full">
                   <div className="flex justify-between items-start w-full gap-2">
-                    <p className="text-[#0d101b] dark:text-white text-sm font-semibold leading-normal line-clamp-1">
+                    <p className="text-text-main dark:text-white text-sm font-semibold leading-normal line-clamp-1">
                       Profile Verified
                     </p>
-                    <p className="text-[#4c599a] dark:text-gray-400 text-xs font-normal leading-normal shrink-0">
+                    <p className="text-text-muted dark:text-gray-400 text-xs font-normal leading-normal shrink-0">
                       1d ago
                     </p>
                   </div>
-                  <p className="text-[#4c599a] dark:text-gray-400 text-sm font-normal leading-relaxed line-clamp-2">
+                  <p className="text-text-muted dark:text-gray-400 text-sm font-normal leading-relaxed line-clamp-2">
                     Your profile verification is complete. You can now apply to
                     all colleges.
                   </p>
@@ -166,14 +166,14 @@ export default function NotificationsPage() {
                 </div>
                 <div className="flex flex-col justify-center gap-0.5 w-full">
                   <div className="flex justify-between items-start w-full gap-2">
-                    <p className="text-[#0d101b] dark:text-white text-sm font-semibold leading-normal line-clamp-1">
+                    <p className="text-text-main dark:text-white text-sm font-semibold leading-normal line-clamp-1">
                       Community Alert
                     </p>
-                    <p className="text-[#4c599a] dark:text-gray-400 text-xs font-normal leading-normal shrink-0">
+                    <p className="text-text-muted dark:text-gray-400 text-xs font-normal leading-normal shrink-0">
                       2d ago
                     </p>
                   </div>
-                  <p className="text-[#4c599a] dark:text-gray-400 text-sm font-normal leading-relaxed line-clamp-2">
+                  <p className="text-text-muted dark:text-gray-400 text-sm font-normal leading-relaxed line-clamp-2">
                     New scholarship opportunities have been added for
                     engineering students.
                   </p>

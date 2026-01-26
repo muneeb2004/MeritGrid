@@ -3,7 +3,7 @@ import React from "react";
 
 export default function SavedScholarshipsPage() {
   return (
-    <div className="bg-background-light dark:bg-background-dark font-display text-[#0d101b] dark:text-white antialiased min-h-screen pb-20">
+    <div className="bg-background-light dark:bg-background-dark font-display text-text-main dark:text-white antialiased min-h-screen pb-20">
       <div className="relative flex h-auto min-h-screen w-full flex-col max-w-7xl mx-auto bg-background-light dark:bg-background-dark overflow-x-hidden">
         {/* Header - iOS Style Large Title */}
         <header className="px-4 pt-8 pb-4 sticky top-0 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-10">
@@ -14,12 +14,12 @@ export default function SavedScholarshipsPage() {
               </span>
             </Link>
             <button className="flex items-center justify-center rounded-full w-10 h-10 bg-white dark:bg-slate-800 shadow-sm border border-slate-200 dark:border-slate-700 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
-              <span className="material-symbols-outlined text-[#0d101b] dark:text-white">
+              <span className="material-symbols-outlined text-text-main dark:text-white">
                 tune
               </span>
             </button>
           </div>
-          <h1 className="text-4xl font-bold tracking-tight text-[#0d101b] dark:text-white">
+          <h1 className="text-4xl font-bold tracking-tight text-text-main dark:text-white">
             Saved
           </h1>
         </header>
@@ -62,7 +62,7 @@ export default function SavedScholarshipsPage() {
                 ></div>
               </div>
               <div className="flex flex-col grow">
-                <h3 className="text-lg font-bold leading-tight text-[#0d101b] dark:text-white group-hover:text-primary transition-colors">
+                <h3 className="text-lg font-bold leading-tight text-text-main dark:text-white group-hover:text-primary transition-colors">
                   Tech Innovation Grant
                 </h3>
                 <p className="text-slate-500 dark:text-slate-400 text-sm">
@@ -106,7 +106,7 @@ export default function SavedScholarshipsPage() {
                 ></div>
               </div>
               <div className="flex flex-col grow">
-                <h3 className="text-lg font-bold leading-tight text-[#0d101b] dark:text-white group-hover:text-primary transition-colors">
+                <h3 className="text-lg font-bold leading-tight text-text-main dark:text-white group-hover:text-primary transition-colors">
                   STEM Leadership Award
                 </h3>
                 <p className="text-slate-500 dark:text-slate-400 text-sm">
@@ -150,7 +150,7 @@ export default function SavedScholarshipsPage() {
                 ></div>
               </div>
               <div className="flex flex-col grow">
-                <h3 className="text-lg font-bold leading-tight text-[#0d101b] dark:text-white group-hover:text-primary transition-colors">
+                <h3 className="text-lg font-bold leading-tight text-text-main dark:text-white group-hover:text-primary transition-colors">
                   Community Impact Scholarship
                 </h3>
                 <p className="text-slate-500 dark:text-slate-400 text-sm">
@@ -194,7 +194,7 @@ export default function SavedScholarshipsPage() {
                 ></div>
               </div>
               <div className="flex flex-col grow">
-                <h3 className="text-lg font-bold leading-tight text-[#0d101b] dark:text-white group-hover:text-primary transition-colors">
+                <h3 className="text-lg font-bold leading-tight text-text-main dark:text-white group-hover:text-primary transition-colors">
                   Creative Arts Fellowship
                 </h3>
                 <p className="text-slate-500 dark:text-slate-400 text-sm">

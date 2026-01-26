@@ -2,18 +2,18 @@ import React from "react";
 
 export default function CalendarPage() {
   return (
-    <div className="bg-background-light dark:bg-background-dark font-display text-[#0d101b] dark:text-white min-h-screen">
+    <div className="bg-background-light dark:bg-background-dark font-display text-text-main dark:text-white min-h-screen">
       <div className="relative flex min-h-screen w-full flex-col max-w-md md:max-w-5xl mx-auto bg-white dark:bg-background-dark shadow-sm overflow-x-hidden pb-24 md:pb-8">
         {/* TopAppBar */}
         <header className="sticky top-0 z-20 flex items-center bg-white/80 dark:bg-background-dark/80 backdrop-blur-md p-4 pb-2 justify-between border-b border-gray-100 dark:border-gray-800">
-          <div className="text-[#0d101b] dark:text-white flex size-12 shrink-0 items-center justify-start cursor-pointer">
+          <div className="text-text-main dark:text-white flex size-12 shrink-0 items-center justify-start cursor-pointer">
             <span className="material-symbols-outlined">chevron_left</span>
           </div>
-          <h2 className="text-[#0d101b] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">
+          <h2 className="text-text-main dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">
             Deadlines
           </h2>
           <div className="flex w-12 items-center justify-end">
-            <button className="flex cursor-pointer items-center justify-center rounded-lg h-12 w-12 bg-transparent text-[#0d101b] dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+            <button className="flex cursor-pointer items-center justify-center rounded-lg h-12 w-12 bg-transparent text-text-main dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
               <span className="material-symbols-outlined">calendar_add_on</span>
             </button>
           </div>
@@ -30,7 +30,7 @@ export default function CalendarPage() {
                   </span>
                 </button>
                 <div className="flex flex-col items-center">
-                  <p className="text-[#0d101b] dark:text-white text-base font-bold leading-tight">
+                  <p className="text-text-main dark:text-white text-base font-bold leading-tight">
                     September 2024
                   </p>
                 </div>
@@ -72,23 +72,23 @@ export default function CalendarPage() {
                 ))}
 
                 {/* Current Month */}
-                <button className="h-11 w-full text-[#0d101b] dark:text-white text-sm font-medium">
+                <button className="h-11 w-full text-text-main dark:text-white text-sm font-medium">
                   <div className="flex size-full flex-col items-center justify-center relative">
                     1
                   </div>
                 </button>
-                <button className="h-11 w-full text-[#0d101b] dark:text-white text-sm font-medium">
+                <button className="h-11 w-full text-text-main dark:text-white text-sm font-medium">
                   <div className="flex size-full items-center justify-center">
                     2
                   </div>
                 </button>
-                <button className="h-11 w-full text-[#0d101b] dark:text-white text-sm font-medium">
+                <button className="h-11 w-full text-text-main dark:text-white text-sm font-medium">
                   <div className="flex size-full flex-col items-center justify-center relative">
                     3
                     <span className="absolute bottom-1.5 size-1 bg-primary rounded-full"></span>
                   </div>
                 </button>
-                <button className="h-11 w-full text-[#0d101b] dark:text-white text-sm font-medium">
+                <button className="h-11 w-full text-text-main dark:text-white text-sm font-medium">
                   <div className="flex size-full items-center justify-center">
                     4
                   </div>
@@ -99,12 +99,12 @@ export default function CalendarPage() {
                     5
                   </div>
                 </button>
-                <button className="h-11 w-full text-[#0d101b] dark:text-white text-sm font-medium">
+                <button className="h-11 w-full text-text-main dark:text-white text-sm font-medium">
                   <div className="flex size-full items-center justify-center">
                     6
                   </div>
                 </button>
-                <button className="h-11 w-full text-[#0d101b] dark:text-white text-sm font-medium">
+                <button className="h-11 w-full text-text-main dark:text-white text-sm font-medium">
                   <div className="flex size-full flex-col items-center justify-center relative">
                     7
                     <span className="absolute bottom-1.5 size-1 bg-violet-500 rounded-full"></span>
@@ -120,7 +120,7 @@ export default function CalendarPage() {
                     </div>
                   </button>
                 ))}
-                <button className="h-11 w-full text-[#0d101b] dark:text-white text-sm font-medium">
+                <button className="h-11 w-full text-text-main dark:text-white text-sm font-medium">
                   <div className="flex size-full flex-col items-center justify-center relative">
                     10
                     <span className="absolute bottom-1.5 size-1 bg-primary rounded-full"></span>
@@ -154,13 +154,13 @@ export default function CalendarPage() {
               </div>
               <div className="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-xl bg-gray-100 dark:bg-gray-800 px-5 transition-colors cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700">
                 <div className="size-2 rounded-full bg-primary"></div>
-                <p className="text-[#0d101b] dark:text-white text-sm font-medium leading-normal">
+                <p className="text-text-main dark:text-white text-sm font-medium leading-normal">
                   Applications
                 </p>
               </div>
               <div className="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-xl bg-gray-100 dark:bg-gray-800 px-5 transition-colors cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700">
                 <div className="size-2 rounded-full bg-violet-500"></div>
-                <p className="text-[#0d101b] dark:text-white text-sm font-medium leading-normal">
+                <p className="text-text-main dark:text-white text-sm font-medium leading-normal">
                   Scholarships
                 </p>
               </div>
@@ -168,7 +168,7 @@ export default function CalendarPage() {
 
             {/* Upcoming Deadlines Section */}
             <div className="bg-white dark:bg-background-dark flex-1 pb-10 md:bg-transparent">
-              <h3 className="text-[#0d101b] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] px-4 py-4 flex items-center justify-between md:px-0 md:pt-0">
+              <h3 className="text-text-main dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] px-4 py-4 flex items-center justify-between md:px-0 md:pt-0">
                 Upcoming Deadlines
                 <span className="text-xs font-medium text-gray-400 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-md">
                   3 total
@@ -188,7 +188,7 @@ export default function CalendarPage() {
                       </span>
                     </div>
                     <div className="flex flex-col justify-center">
-                      <p className="text-[#0d101b] dark:text-white text-base font-semibold leading-normal line-clamp-1">
+                      <p className="text-text-main dark:text-white text-base font-semibold leading-normal line-clamp-1">
                         IBA Final Submission
                       </p>
                       <div className="flex items-center gap-1.5">
@@ -223,7 +223,7 @@ export default function CalendarPage() {
                       </span>
                     </div>
                     <div className="flex flex-col justify-center">
-                      <p className="text-[#0d101b] dark:text-white text-base font-semibold leading-normal line-clamp-1">
+                      <p className="text-text-main dark:text-white text-base font-semibold leading-normal line-clamp-1">
                         MeritGrid Excellence Award
                       </p>
                       <div className="flex items-center gap-1.5">
@@ -258,7 +258,7 @@ export default function CalendarPage() {
                       </span>
                     </div>
                     <div className="flex flex-col justify-center">
-                      <p className="text-[#0d101b] dark:text-white text-base font-semibold leading-normal line-clamp-1">
+                      <p className="text-text-main dark:text-white text-base font-semibold leading-normal line-clamp-1">
                         LUMS Financial Aid Form
                       </p>
                       <div className="flex items-center gap-1.5">
