@@ -3,7 +3,7 @@ import React from "react";
 export default function NotificationsPage() {
   return (
     <div className="bg-background-light dark:bg-background-dark font-display text-[#0d101b] dark:text-white antialiased overflow-x-hidden min-h-screen">
-      <div className="max-w-lg mx-auto min-h-screen relative flex flex-col pb-24">
+      <div className="max-w-3xl mx-auto min-h-screen relative flex flex-col pb-24">
         {/* TopAppBar */}
         <div className="flex flex-col gap-2 bg-background-light dark:bg-background-dark p-4 pb-2 sticky top-0 z-10 transition-colors duration-300">
           <div className="flex items-center h-10 justify-end">

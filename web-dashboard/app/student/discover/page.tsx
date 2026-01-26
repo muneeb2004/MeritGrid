@@ -47,7 +47,7 @@ export default function DiscoverPage() {
               View all
             </button>
           </div>
-          <div className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* University Card 1 */}
             <Link href="/student/discover/habib">
             <div className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-700 group cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300">

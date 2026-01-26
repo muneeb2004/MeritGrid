@@ -17,7 +17,7 @@ export default function ProfilePage() {
                   Application Management
                 </p>
               </div>
-              <nav className="space-y-1">
+              <nav className="grid grid-cols-2 sm:grid-cols-3 lg:flex lg:flex-col gap-1 lg:space-y-1">
                 <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary font-semibold text-sm cursor-pointer">
                   <span className="material-symbols-outlined !text-xl">
                     person
