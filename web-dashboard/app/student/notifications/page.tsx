@@ -220,3 +220,5 @@ export default function NotificationsPage() {
       {/* Home Indicator (Visual Only) */}
       <div className="fixed bottom-2 left-1/2 -translate-x-1/2 z-[60] h-1.5 w-32 rounded-full bg-slate-200 dark:bg-slate-700/50"></div>
     </div>
+  );
+}
