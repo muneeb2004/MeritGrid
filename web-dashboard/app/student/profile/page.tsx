@@ -197,38 +197,7 @@ export default function ProfileEditorPage() {
         </div>
       </main>
 
-      {/* Bottom Tab Bar (iOS Style) */}
-      <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 z-50 flex h-20 w-full max-w-[430px] items-center justify-around border-t border-slate-100 dark:border-slate-800 bg-white/90 dark:bg-background-dark/90 ios-blur px-6 pb-4">
-        <Link
-          href="/student/dashboard"
-          className="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors cursor-pointer p-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/50"
-        >
-          <span className="material-symbols-outlined">dashboard</span>
-          <span className="text-[10px] font-medium">Home</span>
-        </Link>
-        <Link
-          href="/student/discover"
-          className="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors cursor-pointer p-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/50"
-        >
-          <span className="material-symbols-outlined">explore</span>
-          <span className="text-[10px] font-medium">Discover</span>
-        </Link>
-        <button className="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors cursor-pointer p-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/50">
-          <span className="material-symbols-outlined">folder_open</span>
-          <span className="text-[10px] font-medium">Documents</span>
-        </button>
-        <button className="flex flex-col items-center gap-1 text-primary cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50 p-2 rounded-xl transition-colors">
-          <span
-            className="material-symbols-outlined"
-            style={{ fontVariationSettings: "'FILL' 1" }}
-          >
-            person
-          </span>
-          <span className="text-[10px] font-bold">Profile</span>
-        </button>
-      </nav>
-      {/* Home Indicator (Visual Only) */}
-      <div className="fixed bottom-2 left-1/2 -translate-x-1/2 z-[60] h-1.5 w-32 rounded-full bg-slate-200 dark:bg-slate-700/50"></div>
+
 
     </div>
   );

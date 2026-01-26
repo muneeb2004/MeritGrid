@@ -198,32 +198,7 @@ export default function ScholarshipTrackerPage() {
           <span className="font-bold">Find More</span>
         </Link>
       </div>
-      {/* Bottom Navigation Bar (iOS style) */}
-      <div className="fixed bottom-0 left-0 right-0 z-20 bg-white/90 dark:bg-background-dark/90 backdrop-blur-md border-t border-gray-200 dark:border-gray-800 px-6 py-3 pb-8">
-        <div className="max-w-md mx-auto flex justify-between items-center">
-          <Link href="/student/dashboard" className="flex flex-col items-center gap-1 text-gray-400 hover:text-primary transition-colors cursor-pointer">
-            <span className="material-symbols-outlined">home</span>
-            <span className="text-[10px]">Home</span>
-          </Link>
-          <button className="flex flex-col items-center gap-1 text-primary cursor-pointer">
-            <span
-              className="material-symbols-outlined"
-              style={{ fontVariationSettings: "'FILL' 1" }}
-            >
-              account_balance_wallet
-            </span>
-            <span className="text-[10px]">Tracker</span>
-          </button>
-          <Link href="/student/discover" className="flex flex-col items-center gap-1 text-gray-400 hover:text-primary transition-colors cursor-pointer">
-            <span className="material-symbols-outlined">explore</span>
-            <span className="text-[10px]">Explore</span>
-          </Link>
-          <button className="flex flex-col items-center gap-1 text-gray-400 hover:text-primary transition-colors cursor-pointer">
-            <span className="material-symbols-outlined">chat_bubble</span>
-            <span className="text-[10px]">Advisor</span>
-          </button>
-        </div>
-      </div>
+
     </div>
   );
 }

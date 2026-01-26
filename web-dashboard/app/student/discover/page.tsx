@@ -200,58 +200,7 @@ export default function DiscoverPage() {
         </article>
       </div>
       
-      {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 z-50 w-full bg-card-light/90 dark:bg-card-dark/90 backdrop-blur-lg border-t border-gray-200 dark:border-white/5 pb-5 pt-3">
-        <div className="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
-          <button
-            className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-white/5 group cursor-pointer"
-            type="button"
-          >
-            <span className="material-symbols-outlined text-primary mb-1 text-[28px] group-hover:text-primary transition-colors">
-              explore
-            </span>
-            <span className="text-[10px] text-primary dark:text-primary">
-              Discover
-            </span>
-          </button>
-          <button
-            className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-white/5 group cursor-pointer"
-            type="button"
-          >
-            <span className="material-symbols-outlined text-slate-400 dark:text-slate-500 mb-1 text-[28px] group-hover:text-primary transition-colors">
-              bookmark
-            </span>
-            <span className="text-[10px] text-slate-500 dark:text-slate-400 group-hover:text-primary transition-colors">
-              Saved
-            </span>
-          </button>
-          <button
-            className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-white/5 group cursor-pointer"
-            type="button"
-          >
-            <span className="material-symbols-outlined text-slate-400 dark:text-slate-500 mb-1 text-[28px] group-hover:text-primary transition-colors">
-              chat_bubble
-            </span>
-            <span className="text-[10px] text-slate-500 dark:text-slate-400 group-hover:text-primary transition-colors">
-              Inbox
-            </span>
-          </button>
-          <button
-            className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-white/5 group cursor-pointer"
-            type="button"
-          >
-             {/* Link back to Dashboard "Home" for Profile? Or just use Profile as existing? Link to dashboard proper.*/}
-             <Link href="/student/profile" className="flex flex-col items-center">
-                <span className="material-symbols-outlined text-slate-400 dark:text-slate-500 mb-1 text-[28px] group-hover:text-primary transition-colors">
-                person
-                </span>
-                <span className="text-[10px] text-slate-500 dark:text-slate-400 group-hover:text-primary transition-colors">
-                Profile
-                </span>
-            </Link>
-          </button>
-        </div>
-      </nav>
+
     </div>
   );
 }
