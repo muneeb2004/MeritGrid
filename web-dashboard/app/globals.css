@@ -104,7 +104,18 @@ body {
     background-image: radial-gradient(rgb(17 115 212 / 0.06) 1px, transparent 1px);
     background-size: 24px 24px;
   }
+  .geometric-watermark {
+    background-color: var(--background);
+    background-image: radial-gradient(var(--primary) 0.5px, transparent 0.5px), radial-gradient(var(--primary) 0.5px, var(--background) 0.5px);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+    opacity: 0.03;
+  }
   @media (prefers-color-scheme: dark) {
+    .geometric-watermark {
+        opacity: 0.05;
+        background-image: radial-gradient(#ffffff 0.5px, transparent 0.5px), radial-gradient(#ffffff 0.5px, var(--background-dark) 0.5px);
+    }
     .geometric-bg {
         background-color: var(--background-dark);
         background-image: radial-gradient(rgb(255 255 255 / 0.02) 1px, transparent 1px);
