@@ -21,6 +21,8 @@
   --success: #07883b;
   --navy-blue: #001F3F;
   --accent-purple: #6366f1;
+  --border-default: #cfd3e7;
+  --input-bg: #ffffff;
 }
 
 @keyframes float {
@@ -47,6 +49,8 @@
   --color-text-muted: var(--text-muted);
   --color-separator-light: var(--separator-light);
   --color-separator-dark: var(--separator-dark);
+  --color-border-default: var(--border-default);
+  --color-input-bg: var(--input-bg);
   --color-success: var(--success);
   --font-sans: var(--font-lexend);
   --font-mono: var(--font-geist-mono);
@@ -60,6 +64,8 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --border-default: #374151;
+    --input-bg: #1a1e2e;
   }
 }
 

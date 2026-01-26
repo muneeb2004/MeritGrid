@@ -3,7 +3,7 @@ import React from "react";
 
 export default function ApplicationSuccessPage() {
   return (
-    <div className="bg-background-light dark:bg-background-dark min-h-screen flex flex-col font-display text-[#0d101b] dark:text-white pb-20">
+    <div className="bg-background-light dark:bg-background-dark min-h-screen flex flex-col font-display text-text-main dark:text-white pb-20">
       {/* Top Navigation Bar (iOS Style) */}
       <div className="flex items-center bg-background-light dark:bg-background-dark p-4 justify-between sticky top-0 z-10">
         <Link href="/student/dashboard">
@@ -11,7 +11,7 @@ export default function ApplicationSuccessPage() {
             <span className="material-symbols-outlined text-2xl">close</span>
           </div>
         </Link>
-        <h2 className="text-[#0d101b] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12">
+        <h2 className="text-text-main dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12">
           Success
         </h2>
       </div>
@@ -29,12 +29,12 @@ export default function ApplicationSuccessPage() {
         </div>
 
         {/* Headline Text */}
-        <h1 className="text-[#0d101b] dark:text-white tracking-tight text-[32px] font-bold leading-tight text-center pb-3">
+        <h1 className="text-text-main dark:text-white tracking-tight text-[32px] font-bold leading-tight text-center pb-3">
           Application Sent!
         </h1>
 
         {/* Body Text */}
-        <p className="text-[#4c599a] dark:text-gray-400 text-base font-normal leading-relaxed text-center mb-8">
+        <p className="text-text-muted dark:text-gray-400 text-base font-normal leading-relaxed text-center mb-8">
           Your application for the{" "}
           <span className="font-semibold text-primary">
             MeritGrid Excellence Award
@@ -50,7 +50,7 @@ export default function ApplicationSuccessPage() {
                 <p className="text-xs uppercase tracking-wider text-gray-500 font-semibold mb-1">
                   Application ID
                 </p>
-                <p className="text-[#0d101b] dark:text-white font-bold">
+                <p className="text-text-main dark:text-white font-bold">
                   #MG-88291
                 </p>
               </div>
@@ -58,7 +58,7 @@ export default function ApplicationSuccessPage() {
                 <p className="text-xs uppercase tracking-wider text-gray-500 font-semibold mb-1">
                   Date Submitted
                 </p>
-                <p className="text-[#0d101b] dark:text-white font-bold">
+                <p className="text-text-main dark:text-white font-bold">
                   Oct 24, 2023
                 </p>
               </div>
@@ -66,7 +66,7 @@ export default function ApplicationSuccessPage() {
 
             {/* Next Steps List */}
             <div>
-              <p className="text-sm font-bold text-[#0d101b] dark:text-white mb-4">
+              <p className="text-sm font-bold text-text-main dark:text-white mb-4">
                 Next Steps
               </p>
               <div className="space-y-4">
@@ -80,7 +80,7 @@ export default function ApplicationSuccessPage() {
                     <div className="w-0.5 h-full bg-gray-200 dark:bg-slate-700 min-h-[20px]"></div>
                   </div>
                   <div className="flex-1 pb-4">
-                    <p className="text-sm font-semibold text-[#0d101b] dark:text-white">
+                    <p className="text-sm font-semibold text-text-main dark:text-white">
                       Awaiting Review
                     </p>
                     <p className="text-xs text-gray-500">
@@ -148,7 +148,7 @@ export default function ApplicationSuccessPage() {
               Back to Dashboard
             </button>
           </Link>
-          <button className="w-full bg-transparent border-2 border-gray-200 dark:border-slate-700 text-[#0d101b] dark:text-white font-bold py-4 rounded-xl hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors cursor-pointer">
+          <button className="w-full bg-transparent border-2 border-gray-200 dark:border-slate-700 text-text-main dark:text-white font-bold py-4 rounded-xl hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors cursor-pointer">
             View Submitted Application
           </button>
         </div>
