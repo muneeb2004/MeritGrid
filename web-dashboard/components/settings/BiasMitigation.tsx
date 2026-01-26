@@ -2,24 +2,37 @@
 
 import React, { useState } from "react";
 
+// Reusable toggle component
+const Toggle = ({
+  checked,
+  onChange,
+}: {
+  checked: boolean;
+  onChange: () => void;
+}) => (
+  <div
+    className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in cursor-pointer"
+    onClick={onChange}
+  >
+    <div
+      className={`block w-10 h-6 rounded-full border-2 transition-colors duration-200 ease-in-out ${
+        checked
+          ? "bg-primary border-primary"
+          : "bg-gray-200 dark:bg-gray-700 border-gray-200 dark:border-gray-700"
+      }`}
+    ></div>
+    <div
+      className={`dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-200 ease-in-out ${
+        checked ? "transform translate-x-4" : ""
+      }`}
+    ></div>
+  </div>
+);
+
 export default function BiasMitigation() {
   const [anonymized, setAnonymized] = useState(true);
   const [diverseSlate, setDiverseSlate] = useState(true);
   const [schoolBlindness, setSchoolBlindness] = useState(false);
-
-  // Reusable toggle component
-  const Toggle = ({
-    checked,
-    onChange,
-  }: {
-    checked: boolean;
-    onChange: () => void;
-  }) => (
-    <div className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in cursor-pointer" onClick={onChange}>
-      <div className={`block w-10 h-6 rounded-full border-2 transition-colors duration-200 ease-in-out ${checked ? 'bg-primary border-primary' : 'bg-gray-200 dark:bg-gray-700 border-gray-200 dark:border-gray-700'}`}></div>
-      <div className={`dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-200 ease-in-out ${checked ? 'transform translate-x-4' : ''}`}></div>
-    </div>
-  );
 
   return (
     <div className="flex flex-col gap-8">
@@ -112,7 +125,7 @@ export default function BiasMitigation() {
               auto_awesome
             </span>
             <p className="text-xs text-blue-800 dark:text-blue-100 leading-relaxed">
-              <strong>AI Insight:</strong> Enabling "Anonymized Profiles" has
+              <strong>AI Insight:</strong> Enabling &quot;Anonymized Profiles&quot; has
               shown to increase interview diversity by 14% in similar
               industries.
             </p>

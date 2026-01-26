@@ -6,7 +6,7 @@ export default function KanbanBoard() {
   return (
     <main className="flex overflow-x-auto no-scrollbar h-[calc(100vh-125px)] snap-x snap-mandatory">
       {/* Sourced Column */}
-      <KanbanColumn title="Sourced" count={12}>
+      <KanbanColumn title="Sourced" count={12} colorClass="bg-blue-400">
         <KanbanCard
           name="Alex Rivera"
           university="Stanford University"
@@ -19,7 +19,7 @@ export default function KanbanBoard() {
       </KanbanColumn>
 
       {/* Screening Column */}
-      <KanbanColumn title="Screening" count={8}>
+      <KanbanColumn title="Screening" count={8} colorClass="bg-purple-400">
         <KanbanCard
           name="Jordan Smith"
           university="MIT"
@@ -35,9 +35,7 @@ export default function KanbanBoard() {
       <KanbanColumn
         title="Interviewing"
         count={5}
-        bgClass="bg-blue-50/50 dark:bg-blue-900/10"
-        titleColorClass="text-primary"
-        countColorClass="bg-primary text-white"
+        colorClass="bg-primary"
       >
         <KanbanCard
           name="Marcus Chen"
@@ -58,11 +56,7 @@ export default function KanbanBoard() {
         <KanbanCard
           name="Maya Patel"
           university="Georgia Tech"
-          imageUrl="" // Placeholder handled by check or empty URL logic if needed, but design has icon placeholder logic. I'll rely on the img tag for now, or need to adapt KanbanCard to support non-image avatars.
-          // Wait, the design used an explicit icon for Maya. I should update KanbanCard to support avatar fallback or pass a prop.
-          // For now I'll use a placeholder image or leave it blank to see behavior.
-          // Actually, let's just pass a generic avatar image for simplicity or add conditional rendering.
-          // I will use a placeholder image URL for now.
+          imageUrl="" 
           matchScore={88}
           matchColorClass="bg-yellow-50"
           matchTextColorClass="text-yellow-600"
@@ -71,7 +65,7 @@ export default function KanbanBoard() {
       </KanbanColumn>
 
       {/* Technical Test Column */}
-      <KanbanColumn title="Technical Test" count={3}>
+      <KanbanColumn title="Technical Test" count={3} colorClass="bg-yellow-400">
         <div className="opacity-60">
           <KanbanCard
             name="Liam Wilson"
@@ -86,7 +80,7 @@ export default function KanbanBoard() {
       </KanbanColumn>
 
       {/* Offer Column */}
-      <KanbanColumn title="Offer" count={2}>
+      <KanbanColumn title="Offer" count={2} colorClass="bg-green-400">
         <KanbanCard
           name="Elena Rodriguez"
           university="Harvard University"
