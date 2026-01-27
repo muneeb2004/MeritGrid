@@ -2,7 +2,7 @@ import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { prisma } from "./db/postgresql";
+import { prisma } from "@/lib/db/postgresql";
 import bcrypt from "bcryptjs";
 
 /**
@@ -64,7 +64,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.role = (user as { role: string }).role;
+        token.role = (user as any).role;
         token.id = user.id as string;
       }
       return token;

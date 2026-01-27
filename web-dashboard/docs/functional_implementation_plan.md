@@ -29,10 +29,10 @@ We will adopt a hybrid storage strategy to maximize efficiency and scalability.
 
 ### Phase 1: Infrastructure & Shared Core
 
-- [ ] **Environment Setup**: Initialize PostgreSQL (Prisma/Drizzle) and MongoDB (Mongoose) clients.
-- [ ] **Identity & Access**: Implement role-based authentication (RBAC) specifically for `STUDENT`, `TALENT`, and `ORG` roles.
-- [ ] **Centralized Service Layer**: Create abstract data service classes to handle DB choices internally.
-- [ ] **Common Schemas**: Define base Zod schemas for multi-portal data exchange.
+- [x] **Environment Setup**: Initialize PostgreSQL (Prisma 7 with `@prisma/adapter-pg`) and MongoDB (Mongoose) clients.
+- [x] **Identity & Access**: Implement role-based authentication (RBAC)specifically for `STUDENT`, `TALENT`, and `ORG` roles.
+- [x] **Centralized Service Layer**: Create abstract data service classes to handle DB choices internally.
+- [x] **Common Schemas**: Define base Zod schemas for multi-portal data exchange.
 
 ### Phase 2: Student Portal Functionality
 
