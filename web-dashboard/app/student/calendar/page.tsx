@@ -6,10 +6,11 @@ import FilterChip from "@/components/ui/FilterChip";
 
 export default function CalendarPage() {
   return (
-    <div className="bg-background-light dark:bg-background-dark font-display text-text-main dark:text-white min-h-screen">
-      <div className="relative flex min-h-screen w-full flex-col max-w-md md:max-w-5xl mx-auto bg-white dark:bg-background-dark shadow-sm overflow-x-hidden pb-24 md:pb-8">
-        {/* TopAppBar */}
-        <header className="sticky top-0 z-20 flex items-center bg-white/80 dark:bg-background-dark/80 backdrop-blur-md p-4 pb-2 justify-between border-b border-gray-100 dark:border-gray-800">
+    <div className="bg-background-light dark:bg-background-dark font-display text-text-main dark:text-gray-100 min-h-screen">
+      <div className="relative flex min-h-screen w-full flex-col max-w-[1000px] mx-auto bg-transparent overflow-x-hidden md:overflow-visible">
+        
+        {/* --- MOBILE HEADER (iOS Style) --- */}
+        <header className="sticky top-0 z-20 flex lg:hidden items-center bg-white/80 dark:bg-background-dark/80 backdrop-blur-md p-4 pb-2 justify-between border-b border-gray-100 dark:border-gray-800">
           <div className="text-text-main dark:text-white flex size-12 shrink-0 items-center justify-start cursor-pointer">
             <span className="material-symbols-outlined">chevron_left</span>
           </div>
@@ -23,263 +24,205 @@ export default function CalendarPage() {
           </div>
         </header>
 
-        <div className="flex flex-col md:grid md:grid-cols-12 md:gap-8 md:px-4">
-          {/* Calendar Section */}
-          <section className="bg-white dark:bg-background-dark px-4 py-2 md:col-span-7 md:rounded-2xl md:border md:border-gray-100 md:dark:border-gray-800 md:p-6 md:shadow-sm">
-            <div className="flex flex-col gap-0.5">
-              <div className="flex items-center p-1 justify-between mb-2">
-                <Button variant="ghost" size="icon" className="rounded-full">
-                  <span className="material-symbols-outlined text-sm">
-                    arrow_back_ios
-                  </span>
+        {/* --- DESKTOP HEADER --- */}
+        <div className="hidden lg:flex flex-wrap justify-between items-end gap-3 px-6 pt-10 mb-8 w-full">
+          <div className="flex flex-col gap-1">
+            <h1 className="text-text-main dark:text-white text-5xl font-black leading-tight tracking-[-0.033em]">Deadline Calendar</h1>
+            <p className="text-text-muted dark:text-gray-400 text-lg font-medium">Track your upcoming scholarship and university application dates</p>
+          </div>
+          <Button size="lg" className="h-12 px-8 bg-primary hover:bg-primary/90 text-white font-bold rounded-xl shadow-lg shadow-primary/20 transition-all flex items-center gap-2">
+            <span className="material-symbols-outlined">add</span>
+            Add Deadline
+          </Button>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-10 px-4 md:px-6 w-full">
+          
+          {/* LEFT COLUMN: Filters & Calendar */}
+          <div className="lg:col-span-12 xl:col-span-5 flex flex-col gap-6">
+            
+            {/* Filter Navigation (Shared, but styled slightly differently per view) */}
+            <div className="flex gap-2 flex-wrap bg-white dark:bg-gray-800 p-1.5 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+              <button className="flex-1 py-2 px-3 rounded-lg bg-primary text-white text-xs font-bold transition-all">All</button>
+              <button className="flex-1 py-2 px-3 rounded-lg text-gray-600 dark:text-gray-300 text-xs font-semibold hover:bg-gray-100 dark:hover:bg-gray-700 transition-all">Scholarships</button>
+              <button className="flex-1 py-2 px-3 rounded-lg text-gray-600 dark:text-gray-300 text-xs font-semibold hover:bg-gray-100 dark:hover:bg-gray-700 transition-all">University</button>
+            </div>
+
+            {/* Calendar Card (Premium) */}
+            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
+              <div className="flex items-center justify-between mb-6">
+                <Button variant="ghost" size="icon" className="size-9 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+                  <span className="material-symbols-outlined text-lg">chevron_left</span>
                 </Button>
-                <div className="flex flex-col items-center">
-                  <p className="text-text-main dark:text-white text-base font-bold leading-tight">
-                    September 2024
-                  </p>
-                </div>
-                <Button variant="ghost" size="icon" className="rounded-full">
-                  <span className="material-symbols-outlined text-sm">
-                    arrow_forward_ios
-                  </span>
+                <p className="text-text-main dark:text-white text-lg font-bold">September 2024</p>
+                <Button variant="ghost" size="icon" className="size-9 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+                  <span className="material-symbols-outlined text-lg">chevron_right</span>
                 </Button>
               </div>
-              <div className="grid grid-cols-7 mb-2">
-                {[
-                  "S",
-                  "M",
-                  "T",
-                  "W",
-                  "T",
-                  "F",
-                  "S",
-                ].map((day, i) => (
-                  <p
-                    key={i}
-                    className="text-gray-400 text-[11px] font-bold leading-normal tracking-wider flex h-8 w-full items-center justify-center uppercase"
-                  >
-                    {day}
-                  </p>
+              <div className="grid grid-cols-7 gap-y-2">
+                {["S", "M", "T", "W", "T", "F", "S"].map((day, i) => (
+                  <div key={i} className="text-gray-400 text-[11px] lg:text-xs font-bold text-center uppercase py-2 tracking-widest">{day}</div>
                 ))}
-
-                {/* Calendar Days - Simplified for Demo */}
-                {/* Previous Month */}
+                
+                {/* Simplified Calendar Days */}
                 {[25, 26, 27, 28, 29, 30, 31].map((d) => (
-                  <button
-                    key={`prev-${d}`}
-                    className="h-11 w-full text-gray-400 col-start-auto text-sm font-medium"
-                  >
-                    <div className="flex size-full items-center justify-center">
-                      {d}
-                    </div>
-                  </button>
+                  <div key={`p-${d}`} className="h-10 lg:h-12 flex items-center justify-center text-gray-400 text-sm font-medium opacity-50">{d}</div>
                 ))}
-
-                {/* Current Month */}
-                <button className="h-11 w-full text-text-main dark:text-white text-sm font-medium">
-                  <div className="flex size-full flex-col items-center justify-center relative">
-                    1
-                  </div>
-                </button>
-                <button className="h-11 w-full text-text-main dark:text-white text-sm font-medium">
-                  <div className="flex size-full items-center justify-center">
-                    2
-                  </div>
-                </button>
-                <button className="h-11 w-full text-text-main dark:text-white text-sm font-medium">
-                  <div className="flex size-full flex-col items-center justify-center relative">
-                    3
-                    <span className="absolute bottom-1.5 size-1 bg-primary rounded-full"></span>
-                  </div>
-                </button>
-                <button className="h-11 w-full text-text-main dark:text-white text-sm font-medium">
-                  <div className="flex size-full items-center justify-center">
-                    4
-                  </div>
-                </button>
-                {/* Active Day */}
-                <button className="h-11 w-full text-white text-sm font-bold">
-                  <div className="flex size-9 mx-auto items-center justify-center rounded-xl bg-primary shadow-lg shadow-primary/30">
-                    5
-                  </div>
-                </button>
-                <button className="h-11 w-full text-text-main dark:text-white text-sm font-medium">
-                  <div className="flex size-full items-center justify-center">
-                    6
-                  </div>
-                </button>
-                <button className="h-11 w-full text-text-main dark:text-white text-sm font-medium">
-                  <div className="flex size-full flex-col items-center justify-center relative">
-                    7
-                    <span className="absolute bottom-1.5 size-1 bg-violet-500 rounded-full"></span>
-                  </div>
-                </button>
-                {[8, 9].map((d) => (
-                  <button
-                    key={d}
-                    className="h-11 w-full text-[#0d101b] dark:text-white text-sm font-medium"
-                  >
-                    <div className="flex size-full items-center justify-center">
-                      {d}
-                    </div>
-                  </button>
-                ))}
-                <button className="h-11 w-full text-text-main dark:text-white text-sm font-medium">
-                  <div className="flex size-full flex-col items-center justify-center relative">
-                    10
-                    <span className="absolute bottom-1.5 size-1 bg-primary rounded-full"></span>
-                  </div>
-                </button>
-                {[11, 12, 13, 14].map((d) => (
-                  <button
-                    key={d}
-                    className="h-11 w-full text-[#0d101b] dark:text-white text-sm font-medium"
-                  >
-                    <div className="flex size-full items-center justify-center">
-                      {d}
-                    </div>
-                  </button>
+                <CalendarDay day={1} />
+                <CalendarDay day={2} />
+                <CalendarDay day={3} dotColor="bg-primary" />
+                <CalendarDay day={4} />
+                <CalendarDay day={5} isActive />
+                <CalendarDay day={6} />
+                <CalendarDay day={7} dotColor="bg-violet-500" />
+                {[8, 9, 10, 11, 12, 13, 14].map(d => (
+                  <CalendarDay key={d} day={d} dotColor={d === 10 || d === 12 ? 'bg-primary' : undefined} />
                 ))}
               </div>
             </div>
-          </section>
 
-          {/* Right Column: Filters & List */}
-          <div className="md:col-span-5 flex flex-col h-full">
-            {/* Divider (Mobile Only) */}
-            <div className="h-2 bg-background-light dark:bg-background-dark/50 md:hidden"></div>
-
-            {/* Filter Chips */}
-            <div className="flex gap-3 p-4 overflow-x-auto no-scrollbar bg-white dark:bg-background-dark md:px-0 md:pt-0">
-              <FilterChip label="All" active />
-              <FilterChip label="Applications" color="var(--primary)" />
-              <FilterChip label="Scholarships" color="#8b5cf6" />
-            </div>
-
-            {/* Upcoming Deadlines Section */}
-            <div className="bg-white dark:bg-background-dark flex-1 pb-10 md:bg-transparent">
-              <h3 className="text-text-main dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] px-4 py-4 flex items-center justify-between md:px-0 md:pt-0">
-                Upcoming Deadlines
-                <Badge variant="secondary" size="sm">3 total</Badge>
-              </h3>
-              {/* Deadline List Items */}
-              <div className="flex flex-col px-2 md:px-0 gap-2">
-                {/* Item 1: Application */}
-                <Card hoverEffect noPadding className="flex items-center gap-4 px-2 min-h-[80px] py-3 justify-between group bg-white dark:bg-slate-900 border-transparent hover:border-gray-100 md:border-gray-100">
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center justify-center rounded-2xl bg-primary/10 dark:bg-primary/20 shrink-0 size-14 transition-transform group-hover:scale-105">
-                      <span
-                        className="material-symbols-outlined text-primary text-2xl"
-                        style={{ fontVariationSettings: "'FILL' 1" }}
-                      >
-                        circle
-                      </span>
-                    </div>
-                    <div className="flex flex-col justify-center">
-                      <p className="text-text-main dark:text-white text-base font-semibold leading-normal line-clamp-1">
-                        IBA Final Submission
-                      </p>
-                      <div className="flex items-center gap-1.5">
-                        <span className="material-symbols-outlined text-sm text-gray-400">
-                          description
-                        </span>
-                        <p className="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">
-                          Application
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="shrink-0 text-right">
-                    <p className="text-primary text-sm font-bold leading-normal">
-                      3 days left
-                    </p>
-                    <p className="text-[11px] text-gray-400 font-medium">
-                      Due Sept 10
-                    </p>
-                  </div>
-                </Card>
-
-                {/* Item 2: Scholarship */}
-                <Card hoverEffect noPadding className="flex items-center gap-4 px-2 min-h-[80px] py-3 justify-between group bg-white dark:bg-slate-900 border-transparent hover:border-gray-100 md:border-gray-100">
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center justify-center rounded-2xl bg-violet-500/10 dark:bg-violet-500/20 shrink-0 size-14 transition-transform group-hover:scale-105">
-                      <span
-                        className="material-symbols-outlined text-violet-500 text-2xl"
-                        style={{ fontVariationSettings: "'FILL' 1" }}
-                      >
-                        circle
-                      </span>
-                    </div>
-                    <div className="flex flex-col justify-center">
-                      <p className="text-text-main dark:text-white text-base font-semibold leading-normal line-clamp-1">
-                        MeritGrid Excellence Award
-                      </p>
-                      <div className="flex items-center gap-1.5">
-                        <span className="material-symbols-outlined text-sm text-gray-400">
-                          workspace_premium
-                        </span>
-                        <p className="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">
-                          Scholarship
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="shrink-0 text-right">
-                    <p className="text-violet-500 text-sm font-bold leading-normal">
-                      7 days left
-                    </p>
-                    <p className="text-[11px] text-gray-400 font-medium">
-                      Due Sept 14
-                    </p>
-                  </div>
-                </Card>
-
-                {/* Item 3: Application */}
-                <Card hoverEffect noPadding className="flex items-center gap-4 px-2 min-h-[80px] py-3 justify-between group bg-white dark:bg-slate-900 border-transparent hover:border-gray-100 md:border-gray-100">
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center justify-center rounded-2xl bg-primary/10 dark:bg-primary/20 shrink-0 size-14 transition-transform group-hover:scale-105">
-                      <span
-                        className="material-symbols-outlined text-primary text-2xl"
-                        style={{ fontVariationSettings: "'FILL' 1" }}
-                      >
-                        circle
-                      </span>
-                    </div>
-                    <div className="flex flex-col justify-center">
-                      <p className="text-text-main dark:text-white text-base font-semibold leading-normal line-clamp-1">
-                        LUMS Financial Aid Form
-                      </p>
-                      <div className="flex items-center gap-1.5">
-                        <span className="material-symbols-outlined text-sm text-gray-400">
-                          description
-                        </span>
-                        <p className="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">
-                          Application
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="shrink-0 text-right">
-                    <p className="text-primary text-sm font-bold leading-normal">
-                      12 days left
-                    </p>
-                    <p className="text-[11px] text-gray-400 font-medium">
-                      Due Sept 19
-                    </p>
-                  </div>
-                </Card>
+            {/* Motivation Card (Visible only on desktop in this column, or bottom on mobile) */}
+            <div className="hidden xl:flex bg-primary/5 dark:bg-primary/10 rounded-2xl p-6 border border-primary/10 items-center justify-between">
+              <div className="flex gap-4 items-center">
+                <div className="bg-primary text-white p-2.5 rounded-xl shadow-lg shadow-primary/20">
+                  <span className="material-symbols-outlined">emoji_events</span>
+                </div>
+                <div>
+                  <p className="text-text-main dark:text-white font-bold text-base">You're on track!</p>
+                  <p className="text-xs text-text-muted dark:text-gray-400">Finish these 3 deadlines to complete your weekly goal.</p>
+                </div>
+              </div>
+              <div className="relative size-12">
+                <svg className="size-full -rotate-90" viewBox="0 0 36 36">
+                  <circle className="stroke-current text-gray-200 dark:text-gray-700" cx="18" cy="18" fill="none" r="16" strokeWidth="3"></circle>
+                  <circle className="stroke-current text-primary" cx="18" cy="18" fill="none" r="16" strokeDasharray="75, 100" strokeLinecap="round" strokeWidth="3"></circle>
+                </svg>
+                <div className="absolute inset-0 flex items-center justify-center text-[10px] font-black text-primary">75%</div>
               </div>
             </div>
           </div>
+
+          {/* RIGHT COLUMN: Chronological Feed */}
+          <div className="lg:col-span-12 xl:col-span-7 flex flex-col gap-8 mt-10 lg:mt-0 pb-20">
+            
+            {/* Today Section */}
+            <section>
+              <div className="flex items-center gap-2 mb-4">
+                <h2 className="text-2xl font-bold text-text-main dark:text-white tracking-tight">Today</h2>
+                <Badge variant="secondary" className="bg-gray-100 dark:bg-gray-800 font-bold px-2 py-0.5">1</Badge>
+              </div>
+              <FeedItem 
+                title="IBA Final Submission"
+                subtitle="Regular Decision • Undergraduate"
+                type="Application"
+                time="11:59 PM EST"
+                remaining="Due in 4h"
+                isUrgent
+              />
+            </section>
+
+            {/* This Week Section */}
+            <section>
+              <div className="flex items-center gap-2 mb-4">
+                <h2 className="text-2xl font-bold text-text-main dark:text-white tracking-tight">This Week</h2>
+                <Badge variant="secondary" className="bg-gray-100 dark:bg-gray-800 font-bold px-2 py-0.5">2</Badge>
+              </div>
+              <div className="flex flex-col gap-4">
+                <FeedItem 
+                  title="MeritGrid Excellence Award"
+                  subtitle="Merit-based • University of Toronto"
+                  type="Scholarship"
+                  time="Friday, 11:59 PM"
+                  remaining="Due in 3 days"
+                  color="border-primary"
+                  icon="school"
+                  iconBg="bg-blue-50"
+                  iconColor="text-primary"
+                />
+                <FeedItem 
+                   title="LUMS Financial Aid Form"
+                   subtitle="Financial Supporting Documents"
+                   type="Application"
+                   time="Sunday, 5:00 PM"
+                   remaining="Due in 5 days"
+                   color="border-gray-200"
+                   icon="description"
+                   iconBg="bg-gray-50 dark:bg-gray-800"
+                   iconColor="text-gray-500"
+                />
+              </div>
+            </section>
+
+            {/* Motivation Card (Mobile Only at Bottom) */}
+            <div className="xl:hidden bg-primary/5 dark:bg-primary/10 rounded-2xl p-6 border border-primary/10 flex items-center justify-between">
+              <div className="flex gap-4 items-center">
+                <div className="bg-primary text-white p-2 rounded-lg">
+                  <span className="material-symbols-outlined">emoji_events</span>
+                </div>
+                <div>
+                  <p className="text-[#111318] dark:text-white font-bold text-sm">You're on track!</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">Finish these 3 deadlines to complete your weekly goal.</p>
+                </div>
+              </div>
+              <div className="relative size-12">
+                <svg className="size-full -rotate-90" viewBox="0 0 36 36">
+                  <circle className="stroke-current text-gray-200" cx="18" cy="18" fill="none" r="16" strokeWidth="3"></circle>
+                  <circle className="stroke-current text-primary" cx="18" cy="18" fill="none" r="16" strokeDasharray="75, 100" strokeLinecap="round" strokeWidth="3"></circle>
+                </svg>
+                <div className="absolute inset-0 flex items-center justify-center text-[10px] font-black text-primary">75%</div>
+              </div>
+            </div>
+            
+          </div>
         </div>
 
-        {/* Sticky Today FAB */}
+        {/* Floating Add Button for Mobile */}
         <Button 
-          className="fixed bottom-24 right-6 z-30 size-14 rounded-2xl bg-primary text-white shadow-xl shadow-primary/40 flex items-center justify-center active:scale-95 transition-transform cursor-pointer hover:bg-primary/90"
+          className="lg:hidden fixed bottom-6 right-6 z-30 size-14 rounded-2xl bg-primary text-white shadow-xl shadow-primary/40 flex items-center justify-center active:scale-95 transition-transform"
         >
-          <span className="material-symbols-outlined text-3xl">today</span>
+          <span className="material-symbols-outlined text-3xl">add</span>
         </Button>
+        
       </div>
     </div>
+  );
+}
+
+function CalendarDay({ day, isActive = false, dotColor }: { day: number, isActive?: boolean, dotColor?: string }) {
+  return (
+    <div className="flex flex-col items-center justify-center h-10 lg:h-12 relative group cursor-pointer">
+      {isActive && <div className="absolute inset-0 bg-primary/10 rounded-lg scale-90"></div>}
+      <span className={`text-sm lg:text-base font-medium transition-colors ${isActive ? 'text-primary font-bold' : 'text-gray-900 dark:text-gray-100 group-hover:text-primary'}`}>{day}</span>
+      {dotColor && <div className={`size-1 lg:size-1.5 ${dotColor} rounded-full absolute bottom-1 lg:bottom-1.5`}></div>}
+    </div>
+  );
+}
+
+function FeedItem({ title, subtitle, type, time, remaining, isUrgent = false, color = 'border-red-500', icon = 'account_balance', iconBg = 'bg-red-50', iconColor = 'text-red-500' }: any) {
+  return (
+    <Card hoverEffect noPadding className={`bg-white dark:bg-gray-800 rounded-xl border-l-[6px] ${color} shadow-sm border-y border-r border-gray-100 dark:border-gray-700 p-5 group hover:shadow-md transition-all`}>
+      <div className="flex justify-between items-start">
+        <div className="flex gap-4">
+          <div className={`size-12 rounded-xl ${iconBg} dark:bg-opacity-20 flex items-center justify-center border border-gray-100 dark:border-gray-700 transition-transform group-hover:scale-105`}>
+            <span className={`material-symbols-outlined text-2xl ${iconColor}`}>{icon}</span>
+          </div>
+          <div>
+            <h3 className="text-base lg:text-lg font-bold text-text-main dark:text-white group-hover:text-primary transition-colors leading-tight mb-1">{title}</h3>
+            <p className="text-xs lg:text-sm text-text-muted dark:text-gray-400 font-medium">{subtitle}</p>
+            <div className="flex items-center gap-3 mt-3">
+              <div className={`flex items-center gap-1 ${isUrgent ? 'text-red-600' : 'text-primary'}`}>
+                <span className="material-symbols-outlined text-base">{isUrgent ? 'timer' : 'calendar_today'}</span>
+                <span className="text-xs font-bold uppercase tracking-wider">{remaining}</span>
+              </div>
+              <div className="size-1 bg-gray-300 dark:bg-gray-600 rounded-full"></div>
+              <span className="text-xs font-medium text-text-muted dark:text-gray-500">{time}</span>
+            </div>
+          </div>
+        </div>
+        <button className="text-gray-400 hover:text-primary transition-colors cursor-pointer border-none bg-transparent">
+          <span className="material-symbols-outlined">more_horiz</span>
+        </button>
+      </div>
+    </Card>
   );
 }
