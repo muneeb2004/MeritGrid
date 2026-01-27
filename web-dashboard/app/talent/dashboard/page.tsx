@@ -38,7 +38,7 @@ export default function DashboardPage() {
       </nav>
 
       {/* Main Content */}
-      <main className="flex-1 p-8 overflow-y-auto">
+      <main className="flex-1 p-4 md:p-8 overflow-y-auto">
          {/* Welcome Header */}
          <div className="mb-8 flex justify-between items-end">
             <div>
@@ -52,7 +52,7 @@ export default function DashboardPage() {
          </div>
 
          {/* Metric Cards (Pipeline Stages) */}
-         <div className="grid grid-cols-4 gap-6 mb-8">
+         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             {pipelineStages.map((stage) => (
                 <div key={stage.id} className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-5 rounded-xl shadow-sm hover:shadow-md transition-shadow cursor-pointer group">
                     <div className="flex justify-between items-start mb-4">
@@ -76,7 +76,8 @@ export default function DashboardPage() {
                 <h3 className="font-bold text-lg">Recent Applicants</h3>
                 <button className="text-sm text-primary font-bold hover:underline">View All</button>
             </div>
-            <table className="w-full text-left text-sm">
+            <div className="overflow-x-auto">
+                <table className="w-full text-left text-sm min-w-[600px]">
                 <thead>
                     <tr className="bg-gray-50 dark:bg-gray-800/50 text-gray-500 dark:text-gray-400">
                         <th className="px-6 py-3 font-medium">Candidate</th>
@@ -153,6 +154,7 @@ export default function DashboardPage() {
                     </tr>
                 </tbody>
             </table>
+            </div>
          </div>
       </main>
     </div>

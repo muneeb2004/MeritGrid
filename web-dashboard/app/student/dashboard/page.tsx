@@ -4,9 +4,9 @@ import React from "react";
 export default function StudentDashboard() {
   return (
     <div className="bg-background-light dark:bg-background-dark text-[#0d141b] transition-colors duration-200 min-h-screen">
-      <div className="relative flex min-h-screen w-full max-w-[430px] mx-auto flex-col overflow-x-hidden pb-24 shadow-2xl bg-white dark:bg-background-dark">
-        {/* Top App Bar / Navigation */}
-        <header className="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 ios-blur px-4 pt-6 pb-4">
+      <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden pb-12 bg-white dark:bg-background-dark">
+        {/* Top App Bar / Navigation - Only visible on mobile since layout handles desktop */}
+        <header className="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 ios-blur px-4 pt-6 pb-4 lg:hidden">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="size-10 shrink-0 overflow-hidden rounded-full ring-2 ring-primary/20">
@@ -40,209 +40,192 @@ export default function StudentDashboard() {
         </header>
 
         <main className="flex-1 px-4">
-          {/* Section Header */}
-          <div className="pt-6 pb-2">
-            <h2 className="text-[22px] font-bold leading-tight tracking-tight dark:text-white">
-              Application Status
-            </h2>
-            <p className="text-sm text-[#4c739a] dark:text-slate-400">
-              Tracking 4 active applications
-            </p>
-          </div>
-
-          {/* List Item: Habib University */}
-          <div className="mt-4 group active:scale-[0.98] transition-all cursor-pointer">
-            <div className="flex flex-col gap-4 rounded-xl border border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm hover:shadow-md transition-shadow">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <div
-                    className="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-14 ring-1 ring-slate-100 dark:ring-slate-700"
-                    style={{
-                      backgroundImage:
-                        'url("https://lh3.googleusercontent.com/aida-public/AB6AXuCm4BWsYAgzUqFC6fOTOuXlkOFK2YuE2WTueUDoOmizs6vBJmHmJorax1JfnEUBSx6y2isrhQaSNsUqK6pJvmyIrocPLkjoJi15JH9oO0nksRdBZtoolIcVsSBpcRKUyVdxCsvPFL12IfSnQ6FnwdF86xm__wMhlKVoPkv_uo7cB_48myfKwsKmEtcuTzmK8wxgfHxCUYETkwteuqq9QNWzh33QoCt2ct9unm9Eurxa7nCcrrFsF-4cUGe4kSY_Pp_hzL40zPLQPolz")',
-                    }}
-                  ></div>
-                  <div className="flex flex-col justify-center">
-                    <p className="text-[#0d141b] dark:text-white text-lg font-bold leading-tight">
-                      Habib University
-                    </p>
-                    <p className="text-[#4c739a] dark:text-slate-400 text-sm font-medium">
-                      BSc Computer Science
-                    </p>
-                  </div>
-                </div>
-                <div className="flex flex-col items-end gap-1">
-                  <span className="inline-flex items-center rounded-full bg-green-100 dark:bg-green-900/30 px-2.5 py-1 text-xs font-bold text-green-700 dark:text-green-400 uppercase tracking-wide">
-                    Interview Scheduled
-                  </span>
-                </div>
-              </div>
-              <div className="flex items-center gap-2 border-t border-slate-50 dark:border-slate-800 pt-3">
-                <span className="material-symbols-outlined text-primary text-sm">
-                  calendar_today
-                </span>
-                <p className="text-[#4c739a] dark:text-slate-400 text-sm font-medium">
-                  Oct 24, 2023 • 10:00 AM
+          <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-8">
+            {/* Left Column: Applications */}
+            <div>
+              {/* Section Header */}
+              <div className="pt-6 pb-2">
+                <h2 className="text-[22px] font-bold leading-tight tracking-tight dark:text-white">
+                  Application Status
+                </h2>
+                <p className="text-sm text-[#4c739a] dark:text-slate-400">
+                  Tracking 4 active applications
                 </p>
-                <span className="material-symbols-outlined ml-auto text-slate-300 dark:text-slate-600">
-                  chevron_right
-                </span>
               </div>
-            </div>
-          </div>
 
-          {/* List Item: IBA */}
-          <div className="mt-4 group active:scale-[0.98] transition-all cursor-pointer">
-            <div className="flex flex-col gap-4 rounded-xl border border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm hover:shadow-md transition-shadow">
-              <div className="flex items-start justify-between">
-                <div className="flex items-center gap-4">
-                  <div
-                    className="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-14 ring-1 ring-slate-100 dark:ring-slate-700"
-                    style={{
-                      backgroundImage:
-                        'url("https://lh3.googleusercontent.com/aida-public/AB6AXuCbGZwaMXLzbL1HFj4fBHQLis5DDq1VWr-_A-G0KHj6LoPaD0hbHHGm4kiYqKH314nsKazxwkYUiZCWMmmedbitVnC37fhxumMKZdZbJUifUwNFL6WP7_YsupW_VHtpl0PkjDHLjwDOQpRDacSkE6QSolPnxONkK7B2m36pwofpNW-nwhfJHqWpHsAT711N7KpjzyEozyxnnooEZhhe0aGjOg6w_POqFKh3jE9H8Gp4ESARuMdp2YpFAIGtaMR5oFlBgyC_BTbX35Yu")',
-                    }}
-                  ></div>
-                  <div className="flex flex-col justify-center">
-                    <p className="text-[#0d141b] dark:text-white text-lg font-bold leading-tight">
-                      IBA Karachi
-                    </p>
+              {/* List Item: Habib University */}
+              <div className="mt-4 group active:scale-[0.98] transition-all cursor-pointer">
+                <div className="flex flex-col gap-4 rounded-xl border border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm hover:shadow-md transition-shadow">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <div
+                        className="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-14 ring-1 ring-slate-100 dark:ring-slate-700"
+                        style={{
+                          backgroundImage:
+                            'url("https://lh3.googleusercontent.com/aida-public/AB6AXuCm4BWsYAgzUqFC6fOTOuXlkOFK2YuE2WTueUDoOmizs6vBJmHmJorax1JfnEUBSx6y2isrhQaSNsUqK6pJvmyIrocPLkjoJi15JH9oO0nksRdBZtoolIcVsSBpcRKUyVdxCsvPFL12IfSnQ6FnwdF86xm__wMhlKVoPkv_uo7cB_48myfKwsKmEtcuTzmK8wxgfHxCUYETkwteuqq9QNWzh33QoCt2ct9unm9Eurxa7nCcrrFsF-4cUGe4kSY_Pp_hzL40zPLQPolz")',
+                        }}
+                      ></div>
+                      <div className="flex flex-col justify-center">
+                        <p className="text-[#0d141b] dark:text-white text-lg font-bold leading-tight">
+                          Habib University
+                        </p>
+                        <p className="text-[#4c739a] dark:text-slate-400 text-sm font-medium">
+                          BSc Computer Science
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex flex-col items-end gap-1">
+                      <span className="inline-flex items-center rounded-full bg-green-100 dark:bg-green-900/30 px-2.5 py-1 text-xs font-bold text-green-700 dark:text-green-400 uppercase tracking-wide">
+                        Interview Scheduled
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 border-t border-slate-50 dark:border-slate-800 pt-3">
+                    <span className="material-symbols-outlined text-primary text-sm">
+                      calendar_today
+                    </span>
                     <p className="text-[#4c739a] dark:text-slate-400 text-sm font-medium">
-                      BBA Honors
+                      Oct 24, 2023 • 10:00 AM
                     </p>
+                    <span className="material-symbols-outlined ml-auto text-slate-300 dark:text-slate-600">
+                      chevron_right
+                    </span>
                   </div>
                 </div>
-                <span className="inline-flex items-center rounded-full bg-amber-100 dark:bg-amber-900/30 px-2.5 py-1 text-xs font-bold text-amber-700 dark:text-amber-400 uppercase tracking-wide">
-                  Under Review
-                </span>
               </div>
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  {/* eslint-disable-next-line react/no-unescaped-entities */}
-                  <p className="text-[#4c739a] dark:text-slate-400 text-xs font-semibold uppercase">
-                    Step 2 of 4: Document Verification
-                  </p>
-                  <p className="text-primary text-xs font-bold">50%</p>
+
+              {/* List Item: IBA */}
+              <div className="mt-4 group active:scale-[0.98] transition-all cursor-pointer">
+                <div className="flex flex-col gap-4 rounded-xl border border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm hover:shadow-md transition-shadow">
+                  <div className="flex items-start justify-between">
+                    <div className="flex items-center gap-4">
+                      <div
+                        className="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-14 ring-1 ring-slate-100 dark:ring-slate-700"
+                        style={{
+                          backgroundImage:
+                            'url("https://lh3.googleusercontent.com/aida-public/AB6AXuCbGZwaMXLzbL1HFj4fBHQLis5DDq1VWr-_A-G0KHj6LoPaD0hbHHGm4kiYqKH314nsKazxwkYUiZCWMmmedbitVnC37fhxumMKZdZbJUifUwNFL6WP7_YsupW_VHtpl0PkjDHLjwDOQpRDacSkE6QSolPnxONkK7B2m36pwofpNW-nwhfJHqWpHsAT711N7KpjzyEozyxnnooEZhhe0aGjOg6w_POqFKh3jE9H8Gp4ESARuMdp2YpFAIGtaMR5oFlBgyC_BTbX35Yu")',
+                        }}
+                      ></div>
+                      <div className="flex flex-col justify-center">
+                        <p className="text-[#0d141b] dark:text-white text-lg font-bold leading-tight">
+                          IBA Karachi
+                        </p>
+                        <p className="text-[#4c739a] dark:text-slate-400 text-sm font-medium">
+                          BBA Honors
+                        </p>
+                      </div>
+                    </div>
+                    <span className="inline-flex items-center rounded-full bg-amber-100 dark:bg-amber-900/30 px-2.5 py-1 text-xs font-bold text-amber-700 dark:text-amber-400 uppercase tracking-wide">
+                      Under Review
+                    </span>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      {/* eslint-disable-next-line react/no-unescaped-entities */}
+                      <p className="text-[#4c739a] dark:text-slate-400 text-xs font-semibold uppercase">
+                        Step 2 of 4: Document Verification
+                      </p>
+                      <p className="text-primary text-xs font-bold">50%</p>
+                    </div>
+                    <div className="h-2 w-full overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
+                      <div
+                        className="h-full rounded-full bg-primary"
+                        style={{ width: "50%" }}
+                      ></div>
+                    </div>
+                  </div>
+                  <div className="flex items-center border-t border-slate-50 dark:border-slate-800 pt-1">
+                    <span className="material-symbols-outlined ml-auto text-slate-300 dark:text-slate-600">
+                      chevron_right
+                    </span>
+                  </div>
                 </div>
-                <div className="h-2 w-full overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
-                  <div
-                    className="h-full rounded-full bg-primary"
-                    style={{ width: "50%" }}
-                  ></div>
-                </div>
-              </div>
-              <div className="flex items-center border-t border-slate-50 dark:border-slate-800 pt-1">
-                <span className="material-symbols-outlined ml-auto text-slate-300 dark:text-slate-600">
-                  chevron_right
-                </span>
               </div>
             </div>
-          </div>
 
-          {/* Section Header: Next Steps */}
-          <div className="pt-8 pb-2">
-            <h3 className="text-lg font-bold leading-tight tracking-tight dark:text-white">
-              Next Steps
-            </h3>
-          </div>
+            {/* Right Column: Next Steps & Tasks */}
+            <div>
+              {/* Section Header: Next Steps */}
+              <div className="pt-8 lg:pt-6 pb-2">
+                <h3 className="text-lg font-bold leading-tight tracking-tight dark:text-white">
+                  Next Steps
+                </h3>
+              </div>
 
-          {/* Upcoming Tasks Cards */}
-          <div className="grid grid-cols-2 gap-3 mt-2">
-            <div className="p-4 rounded-xl bg-primary/10 border border-primary/20 flex flex-col gap-2">
-              <span className="material-symbols-outlined text-primary">
-                upload_file
-              </span>
-              <p className="text-sm font-bold dark:text-white">
-                Upload Transcripts
-              </p>
-              <p className="text-xs text-[#4c739a] dark:text-slate-400">
-                Due in 2 days
-              </p>
-            </div>
-            <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col gap-2">
-              <span className="material-symbols-outlined text-slate-500">
-                payments
-              </span>
-              <p className="text-sm font-bold dark:text-white">
-                Pay Application Fee
-              </p>
-              <p className="text-xs text-[#4c739a] dark:text-slate-400">
-                Completed
-              </p>
-            </div>
-          </div>
-
-          {/* More Status List (Compact) */}
-          <div className="mt-8 space-y-4">
-            <div className="flex items-center justify-between p-3 bg-slate-50/50 dark:bg-slate-900/50 rounded-lg shrink-0">
-              <div className="flex items-center gap-3">
-                <div className="size-10 bg-slate-200 dark:bg-slate-800 rounded-lg flex items-center justify-center">
-                  <span className="material-symbols-outlined text-slate-500">
-                    school
+              {/* Upcoming Tasks Cards */}
+              <div className="grid grid-cols-2 gap-3 mt-2">
+                <div className="p-4 rounded-xl bg-primary/10 border border-primary/20 flex flex-col gap-2">
+                  <span className="material-symbols-outlined text-primary">
+                    upload_file
                   </span>
-                </div>
-                <div>
                   <p className="text-sm font-bold dark:text-white">
-                    LUMS Admission
+                    Upload Transcripts
                   </p>
                   <p className="text-xs text-[#4c739a] dark:text-slate-400">
-                    Decision Pending
+                    Due in 2 days
                   </p>
                 </div>
-              </div>
-              <span className="material-symbols-outlined text-slate-300">
-                chevron_right
-              </span>
-            </div>
-            <div className="flex items-center justify-between p-3 bg-slate-50/50 dark:bg-slate-900/50 rounded-lg shrink-0">
-              <div className="flex items-center gap-3">
-                <div className="size-10 bg-slate-200 dark:bg-slate-800 rounded-lg flex items-center justify-center">
+                <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col gap-2">
                   <span className="material-symbols-outlined text-slate-500">
-                    school
+                    payments
                   </span>
-                </div>
-                <div>
                   <p className="text-sm font-bold dark:text-white">
-                    FAST University
+                    Pay Application Fee
                   </p>
                   <p className="text-xs text-[#4c739a] dark:text-slate-400">
-                    Application Started
+                    Completed
                   </p>
                 </div>
               </div>
-              <span className="material-symbols-outlined text-slate-300">
-                chevron_right
-              </span>
+
+              {/* More Status List (Compact) */}
+              <div className="mt-8 space-y-4">
+                <div className="flex items-center justify-between p-3 bg-slate-50/50 dark:bg-slate-900/50 rounded-lg shrink-0">
+                  <div className="flex items-center gap-3">
+                    <div className="size-10 bg-slate-200 dark:bg-slate-800 rounded-lg flex items-center justify-center">
+                      <span className="material-symbols-outlined text-slate-500">
+                        school
+                      </span>
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold dark:text-white">
+                        LUMS Admission
+                      </p>
+                      <p className="text-xs text-[#4c739a] dark:text-slate-400">
+                        Decision Pending
+                      </p>
+                    </div>
+                  </div>
+                  <span className="material-symbols-outlined text-slate-300">
+                    chevron_right
+                  </span>
+                </div>
+                <div className="flex items-center justify-between p-3 bg-slate-50/50 dark:bg-slate-900/50 rounded-lg shrink-0">
+                  <div className="flex items-center gap-3">
+                    <div className="size-10 bg-slate-200 dark:bg-slate-800 rounded-lg flex items-center justify-center">
+                      <span className="material-symbols-outlined text-slate-500">
+                        school
+                      </span>
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold dark:text-white">
+                        FAST University
+                      </p>
+                      <p className="text-xs text-[#4c739a] dark:text-slate-400">
+                        Application Started
+                      </p>
+                    </div>
+                  </div>
+                  <span className="material-symbols-outlined text-slate-300">
+                    chevron_right
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </main>
 
-        {/* Bottom Tab Bar (iOS Style) */}
-        <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 z-50 flex h-20 w-full max-w-[430px] items-center justify-around border-t border-slate-100 dark:border-slate-800 bg-white/90 dark:bg-background-dark/90 ios-blur px-6 pb-4">
-          <button className="flex flex-col items-center gap-1 text-primary cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50 p-2 rounded-xl transition-colors">
-            <span
-              className="material-symbols-outlined"
-              style={{ fontVariationSettings: "'FILL' 1" }}
-            >
-              dashboard
-            </span>
-            <span className="text-[10px] font-bold">Home</span>
-          </button>
-          <Link href="/student/discover" className="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors cursor-pointer p-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/50">
-            <span className="material-symbols-outlined">explore</span>
-            <span className="text-[10px] font-medium">Discover</span>
-          </Link>
-          <Link href="/student/advisor" className="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors cursor-pointer p-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/50">
-            <span className="material-symbols-outlined">chat_bubble</span>
-            <span className="text-[10px] font-medium">Advisor</span>
-          </Link>
-          <Link href="/student/profile" className="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors cursor-pointer p-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/50">
-            <span className="material-symbols-outlined">person</span>
-            <span className="text-[10px] font-medium">Profile</span>
-          </Link>
-        </nav>
-        {/* Home Indicator (Visual Only) */}
-        <div className="fixed bottom-2 left-1/2 -translate-x-1/2 z-[60] h-1.5 w-32 rounded-full bg-slate-200 dark:bg-slate-700/50"></div>
+        {/* Home Indicator (Visual Only) - Mobile only */}
       </div>
     </div>
   );
