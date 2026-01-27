@@ -2,39 +2,7 @@ import Link from "next/link";
 import React from "react";
 import PageHeader from "@/components/ui/PageHeader";
 import ScholarshipCard from "@/components/student/ScholarshipCard";
-
-const ACTIVE_APPLICATIONS = [
-  {
-    id: "a1",
-    title: "Global Leaders Scholarship",
-    foundation: "International University",
-    amount: "$20,000",
-    match: "Interview Phase",
-    deadline: "Dec 20, 2024",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuD87FGGM8u64L_cgRVqAbBIUL-yglqQuzngwP2BGuCMMP4DM4Q_3SphVY0r3Y8xhqslOAWXJJ4ChMLl8j58ZjLf0mZ4xbK03GvTU3G26SuvqT4fwMx_wJunvqcN9p9pkcF3u-mhTG9l0TZCILpAALs0Bv089_wVsIgjv0Bmi0tK3hjMbkRjqShd_zHAsBTE6fC_e7xI1bUPtCnFFDdzaB7aQyxX4OYzlmr8eFasVqmb_za8pAc8ESs_pl5BPKmClLTYGffgx71RDXPw",
-    progress: 75,
-    statusBadge: (
-      <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
-        Interview Phase
-      </span>
-    )
-  },
-  {
-    id: "a2",
-    title: "STEM Excellence Grant",
-    foundation: "Tech Institute of America",
-    amount: "$15,000",
-    match: "Under Review",
-    deadline: "Nov 15, 2024",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDA_qZX9Cjtd1LTap_vAqzz4orymLArPljKcsTo5_62eQDGLpZ-TzZ2XnJs-amcR4dSEICmop647r1q8KyHDiFfiX2xu1AQQJb5cvnBz5la1KIHTDVjRld-OcLGYOMQxcJn3ypSDN9lxuXVG60e6LDlunNMgFYhAfUTvi33y2cM9PGoC5W9t8QDJSPVFxQX0SfD0EtcBC7HyzPTCcUys1gbwuiQCRKwNV-VY75HtIz9vIaDGlyEeRT6lkQCSR9LxlmuOGGa_tUHPnE7",
-    progress: 40,
-    statusBadge: (
-      <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300">
-        Under Review
-      </span>
-    )
-  }
-];
+import { ACTIVE_APPLICATIONS } from "@/data/student/scholarships";
 
 export default function ScholarshipsPage() {
   return (
@@ -97,6 +65,11 @@ export default function ScholarshipsPage() {
             <ScholarshipCard 
               key={app.id}
               {...app}
+              statusBadge={
+                <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${app.id === 'a1' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300' : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300'}`}>
+                  {app.match}
+                </span>
+              }
             />
           ))}
         </div>

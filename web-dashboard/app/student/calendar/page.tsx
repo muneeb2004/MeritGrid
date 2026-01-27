@@ -1,8 +1,11 @@
+"use client";
+
 import React from "react";
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import Badge from "@/components/ui/Badge";
 import PageHeader from "@/components/ui/PageHeader";
+import { UPCOMING_DEADLINES, TODAY_DEADLINES } from "@/data/student/deadlines";
 
 export default function CalendarPage() {
   return (
@@ -111,47 +114,29 @@ export default function CalendarPage() {
             <section>
               <div className="flex items-center gap-2 mb-4">
                 <h2 className="text-2xl font-bold text-text-main dark:text-white tracking-tight">Today</h2>
-                <Badge variant="secondary" className="bg-gray-100 dark:bg-gray-800 font-bold px-2 py-0.5">1</Badge>
+                <Badge variant="secondary" className="bg-gray-100 dark:bg-gray-800 font-bold px-2 py-0.5">{TODAY_DEADLINES.length}</Badge>
               </div>
-              <FeedItem 
-                title="IBA Final Submission"
-                subtitle="Regular Decision • Undergraduate"
-                type="Application"
-                time="11:59 PM EST"
-                remaining="Due in 4h"
-                isUrgent
-              />
+              {TODAY_DEADLINES.map(item => (
+                <FeedItem 
+                  key={item.id}
+                  {...item}
+                />
+              ))}
             </section>
 
             {/* This Week Section */}
             <section>
               <div className="flex items-center gap-2 mb-4">
                 <h2 className="text-2xl font-bold text-text-main dark:text-white tracking-tight">This Week</h2>
-                <Badge variant="secondary" className="bg-gray-100 dark:bg-gray-800 font-bold px-2 py-0.5">2</Badge>
+                <Badge variant="secondary" className="bg-gray-100 dark:bg-gray-800 font-bold px-2 py-0.5">{UPCOMING_DEADLINES.length}</Badge>
               </div>
               <div className="flex flex-col gap-4">
-                <FeedItem 
-                  title="MeritGrid Excellence Award"
-                  subtitle="Merit-based • University of Toronto"
-                  type="Scholarship"
-                  time="Friday, 11:59 PM"
-                  remaining="Due in 3 days"
-                  color="border-primary"
-                  icon="school"
-                  iconBg="bg-blue-50"
-                  iconColor="text-primary"
-                />
-                <FeedItem 
-                   title="LUMS Financial Aid Form"
-                   subtitle="Financial Supporting Documents"
-                   type="Application"
-                   time="Sunday, 5:00 PM"
-                   remaining="Due in 5 days"
-                   color="border-gray-200"
-                   icon="description"
-                   iconBg="bg-gray-50 dark:bg-gray-800"
-                   iconColor="text-gray-500"
-                />
+                {UPCOMING_DEADLINES.map(item => (
+                  <FeedItem 
+                    key={item.id}
+                    {...item}
+                  />
+                ))}
               </div>
             </section>
 

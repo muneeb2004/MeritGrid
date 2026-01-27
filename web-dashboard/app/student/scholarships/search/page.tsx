@@ -1,39 +1,10 @@
-import Link from "next/link";
+"use client";
+
 import React from "react";
 import PageHeader from "@/components/ui/PageHeader";
 import SearchBar from "@/components/ui/SearchBar";
 import ScholarshipCard from "@/components/student/ScholarshipCard";
-
-const RECOMMENDED_SCHOLARSHIPS = [
-  {
-    id: "1",
-    title: "MeritGrid Excellence Award",
-    foundation: "Merit Foundation",
-    amount: "$10,000",
-    match: "98% Match",
-    deadline: "Sept 15, 2024",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBS5Oz4hhVeq39WmIc3V1fmPTSOdJ_NLi45_yJcQMCFdwjjb4mXj39xZO2r09-ZYH-GdMSq7BqgHrL62dJ4yL9HCuv8hZm_GkZSD2KSbBsW399pyH6PdOm5305VoyulDDWrnGbizPtOcv2jiOxpEm5bVwJqXg3dVd0o2cRYk_8QVve6OQbRuON4uNENVfa1PIUGHEmolKPfa4O6DjVYs8gMBw24we-Q2pVqaBOnDMrKSBmisvjaBRHay7FAIp5SoFXBBglRs2zodpek",
-    isUrgent: true,
-  },
-  {
-    id: "2",
-    title: "Global STEM Grant",
-    foundation: "TechCorp Industry",
-    amount: "$5,000",
-    match: "85% Match",
-    deadline: "Oct 01, 2024",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDTMe1j5rL42Lab-pRaIDfM7Z_jfAMeZmw5iYGzpXwj2pHfNp4quBTujUbQmNtRibKeScgX6Bry4R6yaM5IkronFZ-lGoQGeJX3TSh-OAX0BnaF8Mjx80_5F0u58epCim2Vsue5FWKJ72qwuZQAlH7YihGV4IYQziQsTXolAoBV8CNQFCSf9r_G-dB5Zf2ARjLLFtb7cXA_XcktzHCwQqT1-N9UxuwaUx4FPWKI2i6t5t_2Bt8_p-xVVgTkclQgDKeLvE7aVl50RPI6",
-  },
-  {
-    id: "3",
-    title: "Creative Leaders Fund",
-    foundation: "Arts Association",
-    amount: "$2,500",
-    match: "62% Match",
-    deadline: "Nov 12, 2024",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAuine8BsWfRMye0e2JJuwWhi06PuRjP2jX_LnLsXU_-xt4urF3NEVmrKlC9Yuuv-CxiLYUl6YZtL5GDxMVFgHiU88YQAjETf39JYj68kq9qlKLSuqQyA2AJ_-CZLZq-AOzWCrJ9jUrlam0JqB0-nZXLAJoAeWzkf1h3vSlskvyHfVC-WwEUd6H4pwB8EqA_UGzEkqB9Qge8aHg-21bT9lN6r6pT7Vp2OOsC3F5ALxfGAP16fqKGpjACyO_ZBpUorxJDNLEa7kVbyaR",
-  },
-];
+import { RECOMMENDED_SCHOLARSHIPS } from "@/data/student/scholarships";
 
 export default function FindScholarshipsPage() {
   return (
@@ -78,6 +49,7 @@ export default function FindScholarshipsPage() {
             <ScholarshipCard 
               key={scholarship.id}
               {...scholarship}
+              match={scholarship.match || "High Match"} // Fallback for match text if needed
             />
           ))}
         </div>

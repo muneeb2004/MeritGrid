@@ -1,13 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import React from "react";
-
-// Mock Data for the Pipeline
-const pipelineStages = [
-  { id: 1, name: "Applied", count: 124, color: "bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-300" },
-  { id: 2, name: "Screening", count: 45, color: "bg-purple-50 text-purple-700 dark:bg-purple-900/20 dark:text-purple-300" },
-  { id: 3, name: "Interview", count: 18, color: "bg-orange-50 text-orange-700 dark:bg-orange-900/20 dark:text-orange-300" },
-  { id: 4, name: "Offer", count: 8, color: "bg-green-50 text-green-700 dark:bg-green-900/20 dark:text-green-300" },
-];
+import { PIPELINE_STAGES, RECENT_APPLICANTS } from "@/data/talent/pipeline";
 
 export default function DashboardPage() {
   return (
@@ -53,7 +48,7 @@ export default function DashboardPage() {
 
          {/* Metric Cards (Pipeline Stages) */}
          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            {pipelineStages.map((stage) => (
+            {PIPELINE_STAGES.map((stage) => (
                 <div key={stage.id} className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-5 rounded-xl shadow-sm hover:shadow-md transition-shadow cursor-pointer group">
                     <div className="flex justify-between items-start mb-4">
                         <span className={`text-xs font-bold uppercase tracking-wider px-2 py-1 rounded ${stage.color}`}>
@@ -88,70 +83,39 @@ export default function DashboardPage() {
                     </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
-                    {/* Row 1 */}
-                    <tr className="hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors">
-                        <td className="px-6 py-4">
-                            <div className="flex items-center gap-3">
-                                <div className="size-9 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 flex items-center justify-center font-bold text-xs">AJ</div>
-                                <div>
-                                    <p className="font-bold text-[#111318] dark:text-white">Alex Johnson</p>
-                                    <p className="text-xs text-gray-500">GPA 3.8 • Karachi</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td className="px-6 py-4 text-gray-600 dark:text-gray-300">BSc Computer Science</td>
-                        <td className="px-6 py-4">
-                            <div className="flex items-center gap-2">
-                                <div className="w-16 h-1.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                                    <div className="bg-green-500 h-full w-[95%]"></div>
-                                </div>
-                                <span className="font-bold text-xs text-green-600">95%</span>
-                            </div>
-                        </td>
-                        <td className="px-6 py-4">
-                            <span className="inline-flex items-center gap-1 rounded-full bg-blue-50 dark:bg-blue-900/20 px-2 py-1 text-xs font-semibold text-blue-600 dark:text-blue-400">
-                                <span className="size-1.5 rounded-full bg-blue-500"></span>
-                                Screening
-                            </span>
-                        </td>
-                        <td className="px-6 py-4">
-                            <button className="text-gray-400 hover:text-primary transition-colors">
-                                <span className="material-symbols-outlined">visibility</span>
-                            </button>
-                        </td>
-                    </tr>
-                    {/* Row 2 */}
-                    <tr className="hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors">
-                        <td className="px-6 py-4">
-                            <div className="flex items-center gap-3">
-                                <div className="size-9 rounded-full bg-purple-100 dark:bg-purple-900 text-purple-600 flex items-center justify-center font-bold text-xs">ZK</div>
-                                <div>
-                                    <p className="font-bold text-[#111318] dark:text-white">Zara Khan</p>
-                                    <p className="text-xs text-gray-500">GPA 4.0 • Lahore</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td className="px-6 py-4 text-gray-600 dark:text-gray-300">BBA Honors</td>
-                        <td className="px-6 py-4">
-                            <div className="flex items-center gap-2">
-                                <div className="w-16 h-1.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                                    <div className="bg-green-500 h-full w-[88%]"></div>
-                                </div>
-                                <span className="font-bold text-xs text-green-600">88%</span>
-                            </div>
-                        </td>
-                        <td className="px-6 py-4">
-                            <span className="inline-flex items-center gap-1 rounded-full bg-orange-50 dark:bg-orange-900/20 px-2 py-1 text-xs font-semibold text-orange-600 dark:text-orange-400">
-                                <span className="size-1.5 rounded-full bg-orange-500"></span>
-                                Interview
-                            </span>
-                        </td>
-                        <td className="px-6 py-4">
-                            <button className="text-gray-400 hover:text-primary transition-colors">
-                                <span className="material-symbols-outlined">visibility</span>
-                            </button>
-                        </td>
-                    </tr>
+                    {RECENT_APPLICANTS.map((applicant) => (
+                      <tr key={applicant.id} className="hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors">
+                          <td className="px-6 py-4">
+                              <div className="flex items-center gap-3">
+                                  <div className={`size-9 rounded-full ${applicant.avatarBg} ${applicant.avatarColor} flex items-center justify-center font-bold text-xs`}>{applicant.initials}</div>
+                                  <div>
+                                      <p className="font-bold text-[#111318] dark:text-white">{applicant.name}</p>
+                                      <p className="text-xs text-gray-500">GPA {applicant.gpa} • {applicant.location}</p>
+                                  </div>
+                              </div>
+                          </td>
+                          <td className="px-6 py-4 text-gray-600 dark:text-gray-300">{applicant.program}</td>
+                          <td className="px-6 py-4">
+                              <div className="flex items-center gap-2">
+                                  <div className="w-16 h-1.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                                      <div className="bg-green-500 h-full" style={{ width: `${applicant.match}%` }}></div>
+                                  </div>
+                                  <span className="font-bold text-xs text-green-600">{applicant.match}%</span>
+                              </div>
+                          </td>
+                          <td className="px-6 py-4">
+                              <span className={`inline-flex items-center gap-1 rounded-full ${applicant.statusColor} px-2 py-1 text-xs font-semibold`}>
+                                  <span className={`size-1.5 rounded-full ${applicant.statusDot}`}></span>
+                                  {applicant.status}
+                              </span>
+                          </td>
+                          <td className="px-6 py-4">
+                              <button className="text-gray-400 hover:text-primary transition-colors">
+                                  <span className="material-symbols-outlined">visibility</span>
+                              </button>
+                          </td>
+                      </tr>
+                    ))}
                 </tbody>
             </table>
             </div>

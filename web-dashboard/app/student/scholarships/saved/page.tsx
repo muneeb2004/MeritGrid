@@ -1,41 +1,11 @@
+"use client";
+
 import React from "react";
 import PageHeader from "@/components/ui/PageHeader";
 import SearchBar from "@/components/ui/SearchBar";
 import ScholarshipCard from "@/components/student/ScholarshipCard";
 import Button from "@/components/ui/Button";
-
-const SAVED_SCHOLARSHIPS = [
-  {
-    id: "s1",
-    title: "MeritGrid Excellence Award",
-    foundation: "Merit Foundation",
-    amount: "$10,000",
-    match: "98% Match",
-    deadline: "Sept 15, 2024",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBS5Oz4hhVeq39WmIc3V1fmPTSOdJ_NLi45_yJcQMCFdwjjb4mXj39xZO2r09-ZYH-GdMSq7BqgHrL62dJ4yL9HCuv8hZm_GkZSD2KSbBsW399pyH6PdOm5305VoyulDDWrnGbizPtOcv2jiOxpEm5bVwJqXg3dVd0o2cRYk_8QVve6OQbRuON4uNENVfa1PIUGHEmolKPfa4O6DjVYs8gMBw24we-Q2pVqaBOnDMrKSBmisvjaBRHay7FAIp5SoFXBBglRs2zodpek",
-    isSaved: true,
-  },
-  {
-    id: "s2",
-    title: "Global STEM Grant",
-    foundation: "TechCorp Industry",
-    amount: "$5,000",
-    match: "85% Match",
-    deadline: "Oct 01, 2024",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDTMe1j5rL42Lab-pRaIDfM7Z_jfAMeZmw5iYGzpXwj2pHfNp4quBTujUbQmNtRibKeScgX6Bry4R6yaM5IkronFZ-lGoQGeJX3TSh-OAX0BnaF8Mjx80_5F0u58epCim2Vsue5FWKJ72qwuZQAlH7YihGV4IYQziQsTXolAoBV8CNQFCSf9r_G-dB5Zf2ARjLLFtb7cXA_XcktzHCwQqT1-N9UxuwaUx4FPWKI2i6t5t_2Bt8_p-xVVgTkclQgDKeLvE7aVl50RPI6",
-    isSaved: true,
-  },
-  {
-    id: "s3",
-    title: "Creative Leaders Fund",
-    foundation: "Arts Association",
-    amount: "$2,500",
-    match: "62% Match",
-    deadline: "Nov 12, 2024",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAuine8BsWfRMye0e2JJuwWhi06PuRjP2jX_LnLsXU_-xt4urF3NEVmrKlC9Yuuv-CxiLYUl6YZtL5GDxMVFgHiU88YQAjETf39JYj68kq9qlKLSuqQyA2AJ_-CZLZq-AOzWCrJ9jUrlam0JqB0-nZXLAJoAeWzkf1h3vSlskvyHfVC-WwEUd6H4pwB8EqA_UGzEkqB9Qge8aHg-21bT9lN6r6pT7Vp2OOsC3F5ALxfGAP16fqKGpjACyO_ZBpUorxJDNLEa7kVbyaR",
-    isSaved: true,
-  }
-];
+import { SAVED_SCHOLARSHIPS } from "@/data/student/scholarships";
 
 export default function SavedScholarshipsPage() {
   return (
@@ -61,7 +31,7 @@ export default function SavedScholarshipsPage() {
         {/* Desktop Filter Bar (Simplified) */}
         <div className="hidden lg:flex flex-wrap items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-800 bg-white dark:bg-background-dark">
           <div className="flex items-center gap-6">
-            <span className="text-sm font-bold text-text-main dark:text-white">3 Awards Found</span>
+            <span className="text-sm font-bold text-text-main dark:text-white">{SAVED_SCHOLARSHIPS.length} Awards Found</span>
             <div className="h-4 w-[1px] bg-gray-200 dark:bg-gray-700"></div>
             <div className="flex gap-4">
               <button className="text-primary text-sm font-bold flex items-center gap-1">
