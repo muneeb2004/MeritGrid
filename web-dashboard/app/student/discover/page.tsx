@@ -1,5 +1,9 @@
 import Link from "next/link";
 import React from "react";
+import Button from "@/components/ui/Button";
+import Card from "@/components/ui/Card";
+import Badge from "@/components/ui/Badge";
+import FilterChip from "@/components/ui/FilterChip";
 
 export default function DiscoverPage() {
   return (
@@ -24,18 +28,10 @@ export default function DiscoverPage() {
           </div>
           {/* Filter Chips */}
           <div className="flex flex-wrap justify-center gap-3">
-            <button className="px-6 py-2 rounded-full bg-primary text-white font-bold text-sm transition-all hover:bg-primary/90 shadow-md shadow-primary/20">
-              Engineering
-            </button>
-            <button className="px-6 py-2 rounded-full bg-white dark:bg-gray-800 text-[#111318] dark:text-gray-200 border border-gray-100 dark:border-gray-700 font-semibold text-sm hover:border-primary transition-all">
-              Medical
-            </button>
-            <button className="px-6 py-2 rounded-full bg-white dark:bg-gray-800 text-[#111318] dark:text-gray-200 border border-gray-100 dark:border-gray-700 font-semibold text-sm hover:border-primary transition-all">
-              Business
-            </button>
-            <button className="px-6 py-2 rounded-full bg-white dark:bg-gray-800 text-[#111318] dark:text-gray-200 border border-gray-100 dark:border-gray-700 font-semibold text-sm hover:border-primary transition-all">
-              Arts & Design
-            </button>
+            <FilterChip label="Engineering" active />
+            <FilterChip label="Medical" />
+            <FilterChip label="Business" />
+            <FilterChip label="Arts & Design" />
           </div>
         </section>
 
@@ -43,14 +39,14 @@ export default function DiscoverPage() {
         <section>
           <div className="flex items-center justify-between mb-6 px-2">
             <h2 className="text-2xl font-bold text-[#111318] dark:text-white">Top Matches for You</h2>
-            <button className="text-sm font-semibold text-primary cursor-pointer hover:underline">
+            <Button variant="ghost" size="sm" className="text-primary hover:text-primary-dark hover:underline">
               View all
-            </button>
+            </Button>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* University Card 1 */}
             <Link href="/student/discover/habib">
-            <div className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-700 group cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+            <Card hoverEffect noPadding className="group">
               <div className="relative h-64 w-full">
                 <div
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
@@ -78,21 +74,15 @@ export default function DiscoverPage() {
                 </div>
               </div>
               <div className="p-6 flex flex-wrap gap-2">
-                <span className="bg-primary/10 text-primary dark:bg-primary/20 dark:text-blue-300 px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider">
-                  Liberal Arts
-                </span>
-                <span className="bg-primary/10 text-primary dark:bg-primary/20 dark:text-blue-300 px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider">
-                  Top 10 Global Ranking
-                </span>
-                <span className="bg-primary/10 text-primary dark:bg-primary/20 dark:text-blue-300 px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider">
-                  Scholarship Available
-                </span>
+                <Badge variant="primary">Liberal Arts</Badge>
+                <Badge variant="primary">Top 10 Global Ranking</Badge>
+                <Badge variant="primary">Scholarship Available</Badge>
               </div>
-            </div>
+            </Card>
             </Link>
 
             {/* University Card 2 */}
-            <div className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-700 group cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+            <Card hoverEffect noPadding className="group">
               <div className="relative h-64 w-full">
                 <div
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
@@ -120,20 +110,14 @@ export default function DiscoverPage() {
                 </div>
               </div>
               <div className="p-6 flex flex-wrap gap-2">
-                <span className="bg-primary/10 text-primary dark:bg-primary/20 dark:text-blue-300 px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider">
-                  Engineering Excellence
-                </span>
-                <span className="bg-primary/10 text-primary dark:bg-primary/20 dark:text-blue-300 px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider">
-                  Historic Prestige
-                </span>
-                <span className="bg-primary/10 text-primary dark:bg-primary/20 dark:text-blue-300 px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider">
-                  Public Sector
-                </span>
+                <Badge variant="primary">Engineering Excellence</Badge>
+                <Badge variant="primary">Historic Prestige</Badge>
+                <Badge variant="primary">Public Sector</Badge>
               </div>
-            </div>
+            </Card>
 
             {/* University Card 3 */}
-            <div className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-700 group cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+            <Card hoverEffect noPadding className="group">
               <div className="relative h-64 w-full">
                 <div
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
@@ -160,14 +144,10 @@ export default function DiscoverPage() {
                 </div>
               </div>
               <div className="p-6 flex flex-wrap gap-2">
-                <span className="bg-primary/10 text-primary dark:bg-primary/20 dark:text-blue-300 px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider">
-                  Business School
-                </span>
-                <span className="bg-primary/10 text-primary dark:bg-primary/20 dark:text-blue-300 px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider">
-                  Entrepreneurship
-                </span>
+                <Badge variant="primary">Business School</Badge>
+                <Badge variant="primary">Entrepreneurship</Badge>
               </div>
-            </div>
+            </Card>
           </div>
         </section>
       </div>

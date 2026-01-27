@@ -1,4 +1,8 @@
 import React from "react";
+import Button from "@/components/ui/Button";
+import Card from "@/components/ui/Card";
+import Badge from "@/components/ui/Badge";
+import FilterChip from "@/components/ui/FilterChip";
 
 export default function CalendarPage() {
   return (
@@ -13,9 +17,9 @@ export default function CalendarPage() {
             Deadlines
           </h2>
           <div className="flex w-12 items-center justify-end">
-            <button className="flex cursor-pointer items-center justify-center rounded-lg h-12 w-12 bg-transparent text-text-main dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-              <span className="material-symbols-outlined">calendar_add_on</span>
-            </button>
+            <Button variant="ghost" size="icon" className="hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">
+               <span className="material-symbols-outlined">calendar_add_on</span>
+            </Button>
           </div>
         </header>
 
@@ -24,21 +28,21 @@ export default function CalendarPage() {
           <section className="bg-white dark:bg-background-dark px-4 py-2 md:col-span-7 md:rounded-2xl md:border md:border-gray-100 md:dark:border-gray-800 md:p-6 md:shadow-sm">
             <div className="flex flex-col gap-0.5">
               <div className="flex items-center p-1 justify-between mb-2">
-                <button className="hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full p-2 transition-colors cursor-pointer">
+                <Button variant="ghost" size="icon" className="rounded-full">
                   <span className="material-symbols-outlined text-sm">
                     arrow_back_ios
                   </span>
-                </button>
+                </Button>
                 <div className="flex flex-col items-center">
                   <p className="text-text-main dark:text-white text-base font-bold leading-tight">
                     September 2024
                   </p>
                 </div>
-                <button className="hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full p-2 transition-colors cursor-pointer">
+                <Button variant="ghost" size="icon" className="rounded-full">
                   <span className="material-symbols-outlined text-sm">
                     arrow_forward_ios
                   </span>
-                </button>
+                </Button>
               </div>
               <div className="grid grid-cols-7 mb-2">
                 {[
@@ -147,37 +151,21 @@ export default function CalendarPage() {
 
             {/* Filter Chips */}
             <div className="flex gap-3 p-4 overflow-x-auto no-scrollbar bg-white dark:bg-background-dark md:px-0 md:pt-0">
-              <div className="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-xl bg-primary px-5 shadow-sm cursor-pointer">
-                <p className="text-white text-sm font-semibold leading-normal">
-                  All
-                </p>
-              </div>
-              <div className="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-xl bg-gray-100 dark:bg-gray-800 px-5 transition-colors cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700">
-                <div className="size-2 rounded-full bg-primary"></div>
-                <p className="text-text-main dark:text-white text-sm font-medium leading-normal">
-                  Applications
-                </p>
-              </div>
-              <div className="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-xl bg-gray-100 dark:bg-gray-800 px-5 transition-colors cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700">
-                <div className="size-2 rounded-full bg-violet-500"></div>
-                <p className="text-text-main dark:text-white text-sm font-medium leading-normal">
-                  Scholarships
-                </p>
-              </div>
+              <FilterChip label="All" active />
+              <FilterChip label="Applications" color="var(--primary)" />
+              <FilterChip label="Scholarships" color="#8b5cf6" />
             </div>
 
             {/* Upcoming Deadlines Section */}
             <div className="bg-white dark:bg-background-dark flex-1 pb-10 md:bg-transparent">
               <h3 className="text-text-main dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] px-4 py-4 flex items-center justify-between md:px-0 md:pt-0">
                 Upcoming Deadlines
-                <span className="text-xs font-medium text-gray-400 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-md">
-                  3 total
-                </span>
+                <Badge variant="secondary" size="sm">3 total</Badge>
               </h3>
               {/* Deadline List Items */}
               <div className="flex flex-col px-2 md:px-0 gap-2">
                 {/* Item 1: Application */}
-                <div className="flex items-center gap-4 px-2 min-h-[80px] py-3 justify-between hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-2xl transition-all cursor-pointer group bg-white dark:bg-slate-900 border border-transparent hover:border-gray-100 dark:hover:border-gray-800 shadow-sm md:shadow-none md:border-gray-100 md:dark:border-gray-800">
+                <Card hoverEffect noPadding className="flex items-center gap-4 px-2 min-h-[80px] py-3 justify-between group bg-white dark:bg-slate-900 border-transparent hover:border-gray-100 md:border-gray-100">
                   <div className="flex items-center gap-4">
                     <div className="flex items-center justify-center rounded-2xl bg-primary/10 dark:bg-primary/20 shrink-0 size-14 transition-transform group-hover:scale-105">
                       <span
@@ -209,10 +197,10 @@ export default function CalendarPage() {
                       Due Sept 10
                     </p>
                   </div>
-                </div>
+                </Card>
 
                 {/* Item 2: Scholarship */}
-                <div className="flex items-center gap-4 px-2 min-h-[80px] py-3 justify-between hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-2xl transition-all cursor-pointer group bg-white dark:bg-slate-900 border border-transparent hover:border-gray-100 dark:hover:border-gray-800 shadow-sm md:shadow-none md:border-gray-100 md:dark:border-gray-800">
+                <Card hoverEffect noPadding className="flex items-center gap-4 px-2 min-h-[80px] py-3 justify-between group bg-white dark:bg-slate-900 border-transparent hover:border-gray-100 md:border-gray-100">
                   <div className="flex items-center gap-4">
                     <div className="flex items-center justify-center rounded-2xl bg-violet-500/10 dark:bg-violet-500/20 shrink-0 size-14 transition-transform group-hover:scale-105">
                       <span
@@ -244,10 +232,10 @@ export default function CalendarPage() {
                       Due Sept 14
                     </p>
                   </div>
-                </div>
+                </Card>
 
                 {/* Item 3: Application */}
-                <div className="flex items-center gap-4 px-2 min-h-[80px] py-3 justify-between hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-2xl transition-all cursor-pointer group bg-white dark:bg-slate-900 border border-transparent hover:border-gray-100 dark:hover:border-gray-800 shadow-sm md:shadow-none md:border-gray-100 md:dark:border-gray-800">
+                <Card hoverEffect noPadding className="flex items-center gap-4 px-2 min-h-[80px] py-3 justify-between group bg-white dark:bg-slate-900 border-transparent hover:border-gray-100 md:border-gray-100">
                   <div className="flex items-center gap-4">
                     <div className="flex items-center justify-center rounded-2xl bg-primary/10 dark:bg-primary/20 shrink-0 size-14 transition-transform group-hover:scale-105">
                       <span
@@ -279,16 +267,18 @@ export default function CalendarPage() {
                       Due Sept 19
                     </p>
                   </div>
-                </div>
+                </Card>
               </div>
             </div>
           </div>
         </div>
 
         {/* Sticky Today FAB */}
-        <button className="fixed bottom-24 right-6 z-30 size-14 rounded-2xl bg-primary text-white shadow-xl shadow-primary/40 flex items-center justify-center active:scale-95 transition-transform cursor-pointer hover:bg-primary/90">
+        <Button 
+          className="fixed bottom-24 right-6 z-30 size-14 rounded-2xl bg-primary text-white shadow-xl shadow-primary/40 flex items-center justify-center active:scale-95 transition-transform cursor-pointer hover:bg-primary/90"
+        >
           <span className="material-symbols-outlined text-3xl">today</span>
-        </button>
+        </Button>
       </div>
     </div>
   );

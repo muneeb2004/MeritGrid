@@ -1,5 +1,5 @@
-import Link from "next/link";
 import React from "react";
+import Button from "@/components/ui/Button";
 
 export default function AdvisorPage() {
   return (
@@ -19,9 +19,9 @@ export default function AdvisorPage() {
                 <p className="text-xs text-primary font-medium">Always active</p>
              </div>
            </div>
-           <button className="flex items-center justify-center size-10 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+           <Button variant="ghost" size="icon" className="rounded-full">
              <span className="material-symbols-outlined">more_vert</span>
-           </button>
+           </Button>
         </div>
       </header>
 
@@ -43,7 +43,7 @@ export default function AdvisorPage() {
                  <div className="flex flex-col gap-1 max-w-[85%]">
                     <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 p-4 rounded-2xl rounded-tl-none shadow-sm text-sm leading-relaxed">
                         <p>Hi Alex! I noticed you updated your profile with new volunteer work. 🌟</p>
-                        <p className="mt-2">Based on that, you're now a <strong>95% match</strong> for the <span className="text-primary font-bold cursor-pointer hover:underline">Global Leaders Scholarship</span> at Habib University.</p>
+                        <p className="mt-2">Based on that, you&apos;re now a <strong>95% match</strong> for the <span className="text-primary font-bold cursor-pointer hover:underline">Global Leaders Scholarship</span> at Habib University.</p>
                         <p className="mt-2">Would you like me to draft a personal statement for it?</p>
                     </div>
                  </div>
@@ -81,18 +81,18 @@ export default function AdvisorPage() {
       <div className="flex-none p-4 pb-24 bg-white dark:bg-background-dark border-t border-gray-100 dark:border-gray-800">
          <div className="max-w-md mx-auto">
              <div className="relative flex items-end gap-2 bg-gray-50 dark:bg-gray-800/50 rounded-[28px] p-2 pr-2 border border-transparent focus-within:border-primary/30 focus-within:bg-white dark:focus-within:bg-gray-800 transition-all shadow-inner">
-                <button className="flex items-center justify-center size-10 rounded-full text-gray-400 hover:text-primary hover:bg-white dark:hover:bg-gray-700 transition-colors flex-shrink-0">
+                <Button variant="ghost" size="icon" className="rounded-full text-gray-400 hover:text-primary hover:bg-white dark:hover:bg-gray-700">
                     <span className="material-symbols-outlined">add_circle</span>
-                </button>
+                </Button>
                 <textarea 
                     rows={1}
                     placeholder="Ask anything..."
-                    className="flex-1 bg-transparent border-none focus:ring-0 p-3 max-h-32 min-h-[44px] text-sm resize-none text-[#0d101b] dark:text-white placeholder:text-gray-400"
+                    className="flex-1 bg-transparent border-none focus:ring-0 p-3 max-h-32 min-h-[44px] text-sm resize-none text-[#0d101b] dark:text-white placeholder:text-gray-400 focus:outline-none"
                     style={{fieldSizing: 'content'} as React.CSSProperties}
                 ></textarea>
-                <button className="flex items-center justify-center size-10 rounded-full bg-primary text-white shadow-md shadow-primary/20 hover:scale-105 active:scale-95 transition-all flex-shrink-0">
+                <Button variant="primary" size="icon" className="rounded-full shadow-md shadow-primary/20 hover:scale-105 active:scale-95">
                     <span className="material-symbols-outlined text-[20px] ml-0.5">send</span>
-                </button>
+                </Button>
              </div>
          </div>
       </div>
