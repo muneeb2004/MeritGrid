@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
+import OnboardingModal from "./OnboardingModal";
 
 export default function LandingPage() {
+  const [isOnboardingOpen, setIsOnboardingOpen] = useState(false);
+
   return (
     <div className="bg-background-light dark:bg-background-dark text-[#111318] dark:text-white font-display overflow-x-hidden antialiased">
       <div className="relative flex min-h-screen w-full flex-col">
@@ -51,16 +54,13 @@ export default function LandingPage() {
                 className="hidden md:block text-sm font-medium text-gray-600 hover:text-primary dark:text-gray-300 transition-colors"
                 href="/student"
               >
-                Student Portal
+                I&apos;m a Student
               </Link>
-              <button className="hidden md:block text-sm font-medium text-gray-600 hover:text-primary dark:text-gray-300">
-                Log in
-              </button>
               <Link
                 className="flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-bold text-white transition-all hover:bg-primary-dark hover:shadow-lg hover:-translate-y-0.5"
                 href="/talent"
               >
-                Get Started
+                Let&apos;s Find Talent
               </Link>
             </div>
           </div>
@@ -86,7 +86,10 @@ export default function LandingPage() {
                     discovered by hundreds of universities.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start pt-2">
-                    <button className="flex items-center justify-center gap-2 rounded-lg bg-primary px-8 py-3.5 text-base font-bold text-white shadow-glow transition-all hover:bg-primary-dark hover:-translate-y-0.5 cursor-pointer">
+                    <button 
+                      onClick={() => setIsOnboardingOpen(true)}
+                      className="flex items-center justify-center gap-2 rounded-lg bg-primary px-8 py-3.5 text-base font-bold text-white shadow-glow transition-all hover:bg-primary-dark hover:-translate-y-0.5 cursor-pointer"
+                    >
                       Join the Network
                       <span
                         className="material-symbols-outlined"
@@ -706,6 +709,10 @@ export default function LandingPage() {
             </div>
           </div>
         </footer>
+        <OnboardingModal 
+          isOpen={isOnboardingOpen} 
+          onClose={() => setIsOnboardingOpen(false)} 
+        />
       </div>
     </div>
   );
