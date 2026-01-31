@@ -145,7 +145,7 @@ export default function OnboardingPage() {
       if (data.institution === "other" && !data.customInstitution.trim()) {
         newErrors.customInstitution = "Please enter your institution name";
       }
-      if (!data.transcript) newErrors.transcript = "Please upload your transcript";
+      // Transcript is optional during registration
     }
 
     if (step === 4) {
@@ -433,12 +433,11 @@ export default function OnboardingPage() {
               )}
 
               <FileUpload
-                label="Verified Credentials (PDF/JPG)"
+                label="Verified Credentials (Optional)"
                 value={data.transcript}
                 onChange={(file) => updateField("transcript", file)}
-                required
                 error={errors.transcript as string}
-                hint="Upload your latest transcript or mark sheet"
+                hint="You can upload your transcript later from your profile"
               />
             </div>
           )}
