@@ -15,7 +15,7 @@ export default async function StudentLayout({
   if (session?.user?.email) {
     // Try to find profile by User ID first, then Email if needed (though relation is via User ID)
     // Auth session provides ID.
-    const userId = session.user.id;
+    const userId = (session.user as any).id;
     if (userId) {
         profile = await prisma.studentProfile.findUnique({
             where: { userId: userId }
