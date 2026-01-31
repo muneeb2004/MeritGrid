@@ -238,11 +238,13 @@ export default function OnboardingPage() {
                   Contact Number <span className="text-red-500">*</span>
                 </label>
                 <div className="flex gap-2">
-                  <Select
-                    options={COUNTRIES.map((c) => ({ value: c.dialCode, label: `${c.dialCode}` }))}
-                    value={data.countryCode}
-                    onChange={(v) => updateField("countryCode", v)}
-                  />
+                  <div className="w-24 shrink-0">
+                    <Select
+                      options={COUNTRIES.map((c) => ({ value: c.dialCode, label: c.dialCode }))}
+                      value={data.countryCode}
+                      onChange={(v) => updateField("countryCode", v)}
+                    />
+                  </div>
                   <div className="flex-1">
                     <Input
                       type="tel"

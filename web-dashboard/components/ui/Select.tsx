@@ -90,9 +90,9 @@ export default function Select({
         </button>
 
         {isOpen && (
-          <div className="absolute z-dropdown mt-2 w-full bg-white dark:bg-gray-900 border border-border-default dark:border-gray-700 rounded-xl shadow-lg max-h-60 overflow-hidden">
+          <div className="absolute z-50 mt-2 w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-xl shadow-xl max-h-60 overflow-hidden">
             {searchable && (
-              <div className="p-2 border-b border-border-default dark:border-gray-700">
+              <div className="p-2 border-b border-gray-200 dark:border-gray-600">
                 <div className="relative">
                   <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-text-muted" />
                   <input
@@ -100,13 +100,13 @@ export default function Select({
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     placeholder="Search..."
-                    className="w-full h-9 pl-9 pr-3 bg-gray-50 dark:bg-white/5 border border-border-default dark:border-gray-700 rounded-lg text-sm focus:outline-none focus:border-primary"
+                    className="w-full h-9 pl-9 pr-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg text-sm text-text-main dark:text-white focus:outline-none focus:border-primary"
                     autoFocus
                   />
                 </div>
               </div>
             )}
-            <div className="overflow-y-auto max-h-48">
+            <div className="overflow-y-auto max-h-48 scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600">
               {filteredOptions.length === 0 ? (
                 <div className="px-4 py-3 text-sm text-text-muted">No options found</div>
               ) : (
@@ -121,8 +121,8 @@ export default function Select({
                     }}
                     className={`
                       w-full px-4 py-2.5 flex items-center justify-between text-left text-sm
-                      hover:bg-gray-50 dark:hover:bg-white/5 transition-colors
-                      ${option.value === value ? "bg-primary/5 text-primary font-medium" : "text-text-main dark:text-white"}
+                      hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors
+                      ${option.value === value ? "bg-primary/10 text-primary font-medium" : "text-text-main dark:text-white"}
                     `}
                   >
                     {option.label}
