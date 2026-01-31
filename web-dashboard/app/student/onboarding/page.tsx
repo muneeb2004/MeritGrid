@@ -156,16 +156,20 @@ export default function OnboardingPage() {
   };
 
   const handleNext = async () => {
+    console.log("🖱️ Handle Next Clicked. Step:", step);
     if (validateStep()) {
+      console.log("✅ Step Validated");
       if (step < 4) {
         setStep(step + 1);
       } else {
         // Complete onboarding - save to database
+        console.log("🚀 Submitting Onboarding Data:", data);
         setIsSubmitting(true);
         setErrors((prev) => ({ ...prev, submit: undefined }));
 
         try {
           const result = await saveStudentOnboarding(data);
+          console.log("📦 Server Action Response:", result);
 
           if (result.success) {
             localStorage.removeItem(STORAGE_KEY);
@@ -174,12 +178,14 @@ export default function OnboardingPage() {
             setErrors((prev) => ({ ...prev, submit: result.error || "Something went wrong" }));
           }
         } catch (error) {
-          console.error("Onboarding failed:", error);
+          console.error("❌ Onboarding failed:", error);
           setErrors((prev) => ({ ...prev, submit: "Something went wrong. Please try again." }));
         } finally {
           setIsSubmitting(false);
         }
       }
+    } else {
+        console.log("⚠️ Step Validation Failed", errors);
     }
   };
 
@@ -525,11 +531,12 @@ export default function OnboardingPage() {
           {/* Navigation */}
           <div className="flex gap-3 mt-8">
             {step > 1 && (
-              <Button variant="outline" onClick={handleBack} startIcon="arrow_back">
+              <Button type="button" variant="outline" onClick={handleBack} startIcon="arrow_back">
                 Back
               </Button>
             )}
             <Button
+              type="button"
               fullWidth
               onClick={handleNext}
               endIcon={!isSubmitting ? (step < 4 ? "arrow_forward" : "check") : undefined}
