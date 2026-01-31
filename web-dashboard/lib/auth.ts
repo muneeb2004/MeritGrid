@@ -19,6 +19,8 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
+  // Use Supabase JWT Secret for signing to ensure compatibility
+  secret: process.env.SUPABASE_JWT_SECRET,
   pages: {
     signIn: "/login",
   },
