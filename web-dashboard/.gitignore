@@ -40,10 +40,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# AI Agent Instructions
-GEMINI.md
-CLAUDE.md
 
 # Promotional Video
 /Promotional Video/
+
+# Video Sources
+/video/
 
