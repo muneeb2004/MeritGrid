@@ -19,6 +19,7 @@ import {
   PRIMARY_OBJECTIVES,
   INTEREST_TAGS,
 } from "@/data/onboardingData";
+import { getInstitutionsForLevel, getInstitutionLabel } from "@/data/institutions";
 
 const STORAGE_KEY = "meritgrid_onboarding";
 
@@ -39,6 +40,8 @@ interface OnboardingData {
   city: string;
   // Step 3: Academic Standing
   educationLevel: string;
+  institution: string;
+  customInstitution: string;
   transcript: File | null;
   // Step 4: Intent & Preferences
   objectives: string[];
@@ -60,6 +63,8 @@ const initialData: OnboardingData = {
   province: "",
   city: "",
   educationLevel: "",
+  institution: "",
+  customInstitution: "",
   transcript: null,
   objectives: [],
   budget: "",
@@ -136,6 +141,10 @@ export default function OnboardingPage() {
 
     if (step === 3) {
       if (!data.educationLevel) newErrors.educationLevel = "Education level is required";
+      if (data.educationLevel && !data.institution) newErrors.institution = "Please select your institution";
+      if (data.institution === "other" && !data.customInstitution.trim()) {
+        newErrors.customInstitution = "Please enter your institution name";
+      }
       if (!data.transcript) newErrors.transcript = "Please upload your transcript";
     }
 
@@ -385,6 +394,42 @@ export default function OnboardingPage() {
               </div>
               {errors.educationLevel && (
                 <p className="text-sm text-red-500">{errors.educationLevel}</p>
+              )}
+
+              {/* Institution Selection - appears after education level is selected */}
+              {data.educationLevel && (
+                <div className="space-y-4 pt-2">
+                  <Select
+                    label={getInstitutionLabel(data.educationLevel)}
+                    options={[
+                      ...getInstitutionsForLevel(data.educationLevel).map((inst) => ({
+                        value: inst,
+                        label: inst,
+                      })),
+                      { value: "other", label: "+ My institution is not listed" },
+                    ]}
+                    value={data.institution}
+                    onChange={(v) => {
+                      updateField("institution", v);
+                      if (v !== "other") updateField("customInstitution", "");
+                    }}
+                    placeholder="Search or select your institution"
+                    required
+                    searchable
+                    error={errors.institution}
+                  />
+
+                  {data.institution === "other" && (
+                    <Input
+                      label="Enter Institution Name"
+                      value={data.customInstitution}
+                      onChange={(e) => updateField("customInstitution", e.target.value)}
+                      placeholder="Enter your school/college/university name"
+                      required
+                      error={errors.customInstitution}
+                    />
+                  )}
+                </div>
               )}
 
               <FileUpload
