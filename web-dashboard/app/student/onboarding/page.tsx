@@ -7,7 +7,6 @@ import { ArrowLeft, GraduationCap, BookOpen, School, Award } from "lucide-react"
 import Input from "@/components/ui/Input";
 import Select from "@/components/ui/Select";
 import Toggle from "@/components/ui/Toggle";
-import FileUpload from "@/components/ui/FileUpload";
 import SelectionCard from "@/components/ui/SelectionCard";
 import Button from "@/components/ui/Button";
 import {
@@ -42,7 +41,6 @@ interface OnboardingData {
   educationLevel: string;
   institution: string;
   customInstitution: string;
-  transcript: File | null;
   // Step 4: Intent & Preferences
   objectives: string[];
   budget: string;
@@ -65,7 +63,6 @@ const initialData: OnboardingData = {
   educationLevel: "",
   institution: "",
   customInstitution: "",
-  transcript: null,
   objectives: [],
   budget: "",
   interests: [],
@@ -431,14 +428,6 @@ export default function OnboardingPage() {
                   )}
                 </div>
               )}
-
-              <FileUpload
-                label="Verified Credentials (Optional)"
-                value={data.transcript}
-                onChange={(file) => updateField("transcript", file)}
-                error={errors.transcript as string}
-                hint="You can upload your transcript later from your profile"
-              />
             </div>
           )}
 
