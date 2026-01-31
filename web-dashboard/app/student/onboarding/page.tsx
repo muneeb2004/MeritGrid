@@ -181,8 +181,8 @@ export default function OnboardingPage() {
   return (
     <div className="min-h-screen bg-background-light dark:bg-background-dark font-display">
       {/* Header */}
-      <header className="px-6 py-4 border-b border-border-default dark:border-gray-800">
-        <div className="max-w-xl mx-auto flex items-center justify-between">
+      <header className="px-6 md:px-12 py-4 border-b border-border-default dark:border-gray-800">
+        <div className="max-w-3xl mx-auto flex items-center justify-between">
           <Link href="/student" className="flex items-center gap-2 text-text-muted hover:text-primary transition-colors">
             <ArrowLeft size={20} />
             <span className="text-sm font-medium">Back</span>
