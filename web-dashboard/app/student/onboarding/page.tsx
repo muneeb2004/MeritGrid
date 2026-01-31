@@ -165,10 +165,12 @@ export default function OnboardingPage() {
 
   const getEducationIcon = (id: string) => {
     switch (id) {
-      case "matric": return <School size={32} />;
-      case "intermediate": return <BookOpen size={32} />;
-      case "undergraduate": return <GraduationCap size={32} />;
-      case "postgraduate": return <Award size={32} />;
+      case "olevel": return <School size={28} />;
+      case "matric": return <School size={28} />;
+      case "alevel": return <BookOpen size={28} />;
+      case "intermediate": return <BookOpen size={28} />;
+      case "undergraduate": return <GraduationCap size={28} />;
+      case "postgraduate": return <Award size={28} />;
       default: return null;
     }
   };
@@ -368,7 +370,7 @@ export default function OnboardingPage() {
                 <p className="text-text-muted mt-1">What&apos;s your current education level?</p>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                 {EDUCATION_LEVELS.map((level) => (
                   <SelectionCard
                     key={level.id}

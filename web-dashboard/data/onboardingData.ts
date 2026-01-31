@@ -53,8 +53,10 @@ export const PAKISTAN_CITIES: Record<string, string[]> = {
 };
 
 export const EDUCATION_LEVELS = [
-  { id: "matric", label: "O-Level / Matric", description: "Secondary school" },
-  { id: "intermediate", label: "A-Level / Intermediate", description: "Higher secondary" },
+  { id: "olevel", label: "O-Level", description: "Cambridge/International" },
+  { id: "matric", label: "Matric", description: "SSC / 10th Grade" },
+  { id: "alevel", label: "A-Level", description: "Cambridge/International" },
+  { id: "intermediate", label: "Intermediate", description: "HSSC / FSc / FA" },
   { id: "undergraduate", label: "Undergraduate", description: "Bachelor's degree" },
   { id: "postgraduate", label: "Post-Graduate", description: "Master's / PhD" },
 ] as const;
