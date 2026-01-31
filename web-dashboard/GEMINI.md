@@ -4,12 +4,29 @@ This document provides specialized instructions for Gemini/Antigravity AI agents
 
 ## 1. Architectural Integrity
 
-### Hybrid Database Strategy
+### Hybrid Database Strategy (Supabase + Prisma)
 
-- **PostgreSQL (Prisma)**: Core identity, RBAC, and relational application tracking.
+**Infrastructure:**
+- **Supabase PostgreSQL**: Managed PostgreSQL database with built-in auth, storage, and real-time.
 - **MongoDB (Mongoose)**: Flexible scholarship/job schemas and high-volume logs.
-- **Data Fetching Strategy**: At all appropriate places, data MUST be fetched from the database. However, since the database will be connected at the end of the development phase, ALWAYS implement a robust fallback to demo/mock data for testing purposes.
-- **Decision Engine**: Refer to `docs/functional_implementation_plan.md` for the database choice tree.
+
+**Client Usage:**
+
+| Use Case | Client | Location |
+|----------|--------|----------|
+| **Database Queries** | Prisma (`@/lib/db/postgresql`) | Server actions, API routes |
+| **Auth & Sessions** | Supabase Client (`@/lib/supabase/server`) | Server components, middleware |
+| **File Storage** | Supabase Client (`@/lib/supabase/server`) | API routes |
+| **Real-time Subscriptions** | Supabase Client (`@/lib/supabase/client`) | Client components |
+| **Admin Operations** | Supabase Admin (`@/lib/supabase/admin`) | Background jobs, cron |
+
+**Connection Strings:**
+- `DATABASE_URL`: Pooled connection (port 6543) - For serverless/API routes
+- `DIRECT_URL`: Direct connection (port 5432) - For Prisma migrations only
+
+**Data Fetching Strategy:** At all appropriate places, data MUST be fetched from the database. However, since the database will be connected at the end of the development phase, ALWAYS implement a robust fallback to demo/mock data for testing purposes.
+
+**Decision Engine:** Refer to `docs/functional_implementation_plan.md` for the database choice tree.
 
 ### Scalability Standards
 

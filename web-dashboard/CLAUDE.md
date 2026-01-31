@@ -4,12 +4,28 @@ These guidelines establish standardized practices for AI engineers (Claude, GPT,
 
 ## 1. Core Architecture
 
-### Hybrid Data Layer
+### Hybrid Data Layer (Supabase + Prisma)
 
-- **Relational (PostgreSQL)**: Use for transactional data (Auth, Applications). Powered by **Prisma 7** with `@prisma/adapter-pg`.
-- **Document (MongoDB)**: Use for varied content (Scholarships, Career Listings).
-- **Caching (Redis)**: Use for session state and global rate limiting.
-- **Hybrid Fetching Pattern**: All data-fetching layers must attempt to pull from the database while providing a seamless fallback to demo data. The database connection will be finalized late-stage; mock data is the primary driver for current development and testing.
+**Infrastructure:**
+- **Supabase PostgreSQL**: Managed PostgreSQL database with built-in auth, storage, and real-time.
+- **MongoDB (Mongoose)**: Flexible scholarship/job schemas and high-volume logs.
+- **Redis**: Session state and global rate limiting.
+
+**Client Usage:**
+
+| Use Case | Client | Location |
+|----------|--------|----------|
+| **Database Queries** | Prisma (`@/lib/db/postgresql`) | Server actions, API routes |
+| **Auth & Sessions** | Supabase Client (`@/lib/supabase/server`) | Server components, middleware |
+| **File Storage** | Supabase Client (`@/lib/supabase/server`) | API routes |
+| **Real-time Subscriptions** | Supabase Client (`@/lib/supabase/client`) | Client components |
+| **Admin Operations** | Supabase Admin (`@/lib/supabase/admin`) | Background jobs, cron |
+
+**Connection Strings:**
+- `DATABASE_URL`: Pooled connection (port 6543) - For serverless/API routes
+- `DIRECT_URL`: Direct connection (port 5432) - For Prisma migrations only
+
+**Hybrid Fetching Pattern:** All data-fetching layers must attempt to pull from the database while providing a seamless fallback to demo data. The database connection will be finalized late-stage; mock data is the primary driver for current development and testing.
 
 ### Service Layer Pattern
 

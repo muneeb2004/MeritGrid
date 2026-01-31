@@ -1,32 +1,69 @@
+/**
+ * PostgreSQL Database Client (Prisma + Supabase)
+ *
+ * Purpose: Handles connection to Supabase PostgreSQL via Prisma ORM.
+ * 
+ * Architecture:
+ * - Uses Supabase PostgreSQL as the managed database
+ * - Prisma provides type-safe queries and migrations
+ * - Connection pooling via Supabase's pgbouncer (Transaction mode)
+ *
+ * Connection Types:
+ * - DATABASE_URL: Pooled connection (6543) - For serverless/API routes
+ * - DIRECT_URL: Direct connection (5432) - For migrations only
+ *
+ * @see https://supabase.com/docs/guides/database/connecting-to-postgres#connecting-with-drizzle
+ */
+
 import { PrismaClient } from "./generated-client";
 import { Pool } from "pg";
 import { PrismaPg } from "@prisma/adapter-pg";
 
-/**
- * PostgreSQL Database Client (Prisma)
- * 
- * Purpose: Handles connection to the relational database.
- * Scaling: Uses a singleton pattern and Prisma 7 adapter for optimized pooling.
- */
+// Development fallback for build phase (Prisma needs a valid URL syntax)
+const connectionString =
+  process.env.DATABASE_URL ||
+  "postgresql://placeholder:placeholder@localhost:5432/placeholder";
 
-const connectionString = process.env.DATABASE_URL || "postgresql://placeholder:placeholder@localhost:5432/placeholder";
-
+// Warn in production if DATABASE_URL is missing
 if (!process.env.DATABASE_URL && process.env.NODE_ENV === "production") {
-  console.warn("WARNING: DATABASE_URL is not defined. Using placeholder for build phase.");
+  console.error(
+    "❌ CRITICAL: DATABASE_URL is not defined in production. Database operations will fail."
+  );
 }
 
-const pool = new Pool({ connectionString });
+// Development mode logging
+if (!process.env.DATABASE_URL && process.env.NODE_ENV === "development") {
+  console.warn(
+    "⚠️ DATABASE_URL not set. Using placeholder connection string for build phase."
+  );
+}
+
+// Configure pool for Supabase's pgbouncer (Transaction mode)
+const pool = new Pool({
+  connectionString,
+  // Supabase Pooler uses Transaction mode - don't use prepared statements
+  // This is handled by the ?pgbouncer=true query param in the URL
+});
+
 const adapter = new PrismaPg(pool);
 
+// Singleton pattern for Prisma client
 const globalForPrisma = global as unknown as { prisma: PrismaClient };
 
 export const prisma =
   globalForPrisma.prisma ||
   new PrismaClient({
     adapter,
-    log: process.env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
+    log:
+      process.env.NODE_ENV === "development"
+        ? ["query", "error", "warn"]
+        : ["error"],
   });
 
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+// Preserve client across hot reloads in development
+if (process.env.NODE_ENV !== "production") {
+  globalForPrisma.prisma = prisma;
+}
 
+// Named export for consistency with other db clients
 export const pgClient = prisma;

@@ -52,17 +52,49 @@ model User {
 }
 
 model StudentProfile {
-  id             String   @id @default(cuid())
-  userId         String   @unique
-  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  gpa            Float?
-  location       String?
-  program        String?
-  bio            String?
-  skills         String[]
-  education      Json?    // Array of education history
-  experience     Json?    // Array of work experience
+  id                    String    @id @default(cuid())
+  userId                String    @unique
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Personal Identity (Onboarding Step 1)
+  fullName              String?
+  nationality           String?   // "national" | "foreign"
+  countryCode           String?   // e.g., "+92"
+  phone                 String?
+  gender                String?
+
+  // Geographic Details (Onboarding Step 2)
+  address               String?
+  society               String?
+  street                String?
+  country               String?
+  province              String?
+  city                  String?
+
+  // Academic Standing (Onboarding Step 3)
+  educationLevel        String?
+  institution           String?
+  customInstitution     String?
+
+  // Intent & Preferences (Onboarding Step 4)
+  objectives            String[]  // Array of objective IDs
+  budget                String?
+  interests             String[]  // Array of interest tags
+
+  // Extended Profile Data
+  gpa                   Float?
+  program               String?
+  bio                   String?
+  skills                String[]
+  education             Json?     // Array of education history
+  experience            Json?     // Array of work experience
+
+  // Metadata
+  onboardingCompletedAt DateTime?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
 }
+
 
 model TalentProfile {
   id             String   @id @default(cuid())

@@ -19,6 +19,7 @@ import {
   INTEREST_TAGS,
 } from "@/data/onboardingData";
 import { getInstitutionsForLevel, getInstitutionLabel } from "@/data/institutions";
+import { saveStudentOnboarding } from "@/app/actions/onboarding";
 
 const STORAGE_KEY = "meritgrid_onboarding";
 
@@ -87,7 +88,8 @@ export default function OnboardingPage() {
   const router = useRouter();
   const [step, setStep] = useState(1);
   const [data, setData] = useState<OnboardingData>(loadSavedData);
-  const [errors, setErrors] = useState<Partial<Record<keyof OnboardingData, string>>>({});
+  const [errors, setErrors] = useState<Partial<Record<keyof OnboardingData | "submit", string>>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Save to localStorage on data change
   useEffect(() => {
@@ -153,14 +155,30 @@ export default function OnboardingPage() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (validateStep()) {
       if (step < 4) {
         setStep(step + 1);
       } else {
-        // Complete onboarding
-        localStorage.removeItem(STORAGE_KEY);
-        router.push("/student/dashboard");
+        // Complete onboarding - save to database
+        setIsSubmitting(true);
+        setErrors((prev) => ({ ...prev, submit: undefined }));
+
+        try {
+          const result = await saveStudentOnboarding(data);
+
+          if (result.success) {
+            localStorage.removeItem(STORAGE_KEY);
+            router.push("/student/dashboard");
+          } else {
+            setErrors((prev) => ({ ...prev, submit: result.error || "Something went wrong" }));
+          }
+        } catch (error) {
+          console.error("Onboarding failed:", error);
+          setErrors((prev) => ({ ...prev, submit: "Something went wrong. Please try again." }));
+        } finally {
+          setIsSubmitting(false);
+        }
       }
     }
   };
@@ -511,7 +529,13 @@ export default function OnboardingPage() {
                 Back
               </Button>
             )}
-            <Button fullWidth onClick={handleNext} endIcon={step < 4 ? "arrow_forward" : "check"}>
+            <Button
+              fullWidth
+              onClick={handleNext}
+              endIcon={!isSubmitting ? (step < 4 ? "arrow_forward" : "check") : undefined}
+              isLoading={isSubmitting}
+              disabled={isSubmitting}
+            >
               {step < 4 ? "Continue" : "Complete Setup"}
             </Button>
           </div>
