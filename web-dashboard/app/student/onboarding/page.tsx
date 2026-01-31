@@ -87,15 +87,26 @@ function loadSavedData(): OnboardingData {
 export default function OnboardingPage() {
   const router = useRouter();
   const [step, setStep] = useState(1);
-  const [data, setData] = useState<OnboardingData>(loadSavedData);
+  const [data, setData] = useState<OnboardingData>(initialData);
   const [errors, setErrors] = useState<Partial<Record<keyof OnboardingData | "submit", string>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Load saved data on mount
+  useEffect(() => {
+    setIsMounted(true);
+    const saved = loadSavedData();
+    if (saved) {
+        setData(prev => ({ ...prev, ...saved }));
+    }
+  }, []);
 
   // Save to localStorage on data change
   useEffect(() => {
+    if (!isMounted) return;
     const toSave = { ...data, transcript: null };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
-  }, [data]);
+  }, [data, isMounted]);
 
   const updateField = <K extends keyof OnboardingData>(field: K, value: OnboardingData[K]) => {
     setData((prev) => ({ ...prev, [field]: value }));
@@ -156,20 +167,16 @@ export default function OnboardingPage() {
   };
 
   const handleNext = async () => {
-    console.log("🖱️ Handle Next Clicked. Step:", step);
     if (validateStep()) {
-      console.log("✅ Step Validated");
       if (step < 4) {
         setStep(step + 1);
       } else {
         // Complete onboarding - save to database
-        console.log("🚀 Submitting Onboarding Data:", data);
         setIsSubmitting(true);
         setErrors((prev) => ({ ...prev, submit: undefined }));
 
         try {
           const result = await saveStudentOnboarding(data);
-          console.log("📦 Server Action Response:", result);
 
           if (result.success) {
             localStorage.removeItem(STORAGE_KEY);
@@ -178,14 +185,12 @@ export default function OnboardingPage() {
             setErrors((prev) => ({ ...prev, submit: result.error || "Something went wrong" }));
           }
         } catch (error) {
-          console.error("❌ Onboarding failed:", error);
+          console.error("Onboarding failed:", error);
           setErrors((prev) => ({ ...prev, submit: "Something went wrong. Please try again." }));
         } finally {
           setIsSubmitting(false);
         }
       }
-    } else {
-        console.log("⚠️ Step Validation Failed", errors);
     }
   };
 
