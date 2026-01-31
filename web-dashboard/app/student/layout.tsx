@@ -12,11 +12,11 @@ export default function StudentLayout({
 }) {
   const pathname = usePathname();
   
-  // Hide sidebar on the main /student landing page (unauthenticated view)
-  const isLandingPage = pathname === "/student";
+  // Hide sidebar on landing page and onboarding flow (unauthenticated views)
+  const isFullWidthPage = pathname === "/student" || pathname.startsWith("/student/onboarding");
 
-  // Landing page gets full-width layout without sidebar
-  if (isLandingPage) {
+  // Full-width layout without sidebar for unauthenticated pages
+  if (isFullWidthPage) {
     return <>{children}</>;
   }
 
