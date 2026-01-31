@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import { usePathname } from "next/navigation";
 import StudentSidebar from "@/components/student/StudentSidebar";
 import StudentBottomNav from "@/components/student/StudentBottomNav";
 
@@ -7,6 +10,17 @@ export default function StudentLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+  
+  // Hide sidebar on the main /student landing page (unauthenticated view)
+  const isLandingPage = pathname === "/student";
+
+  // Landing page gets full-width layout without sidebar
+  if (isLandingPage) {
+    return <>{children}</>;
+  }
+
+  // Authenticated pages get sidebar layout
   return (
     <div className="flex min-h-screen bg-background-light dark:bg-background-dark font-display">
       {/* Desktop Sidebar */}
