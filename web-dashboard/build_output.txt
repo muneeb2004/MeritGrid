@@ -1,7 +1,3 @@
-
-> web-dashboard@0.1.0 build
-> next build
-
 ΓÜá Warning: Next.js inferred your workspace root, but it may not be correct.
  We detected multiple lockfiles and selected the directory of D:\Web Projects\package-lock.json as the root directory.
  To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
@@ -12,18 +8,23 @@
 Γû▓ Next.js 16.1.4 (Turbopack)
 
   Creating an optimized production build ...
-Γ£ô Compiled successfully in 7.0s
-  Running TypeScript ...
-Failed to compile.
 
-./Promotional Video/01_Discovery/Landing_Page_UI.tsx:3:29
-Type error: Cannot find module './OnboardingModal' or its corresponding type declarations.
-
-  1 | import React, { useState } from "react";
-  2 | import Link from "next/link";
-> 3 | import OnboardingModal from "./OnboardingModal";
-    |                             ^
+> Build error occurred
+Error: Turbopack build failed with 1 errors:
+./MeritGrid/web-dashboard/app/student/page.tsx:3:1
+Module not found: Can't resolve 'lucide-react'
+  1 | import Link from "next/link";
+  2 | import React from "react";
+> 3 | import { GraduationCap, Briefcase, Award, ArrowRight } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   4 |
-  5 | export default function LandingPage() {
-  6 |   const [isOnboardingOpen, setIsOnboardingOpen] = useState(false);
-Next.js build worker exited with code: 1 and signal: null
+  5 | export default function StudentPortalPage() {
+  6 |   return (
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (./MeritGrid/web-dashboard/app/student/page.tsx:3:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)

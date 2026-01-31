@@ -68,7 +68,7 @@ export default function StudentPortalPage() {
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 w-full max-w-md">
           <Link 
-            href="/student/dashboard" 
+            href="/student/onboarding" 
             className="flex-1 flex items-center justify-center gap-2 h-14 px-6 bg-primary hover:bg-primary-dark transition-colors text-white text-base font-bold rounded-xl shadow-md"
           >
             Get Started
