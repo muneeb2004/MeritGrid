@@ -1,40 +1,34 @@
-"use client";
-
 import React from "react";
-import { usePathname } from "next/navigation";
-import StudentSidebar from "@/components/student/StudentSidebar";
-import StudentBottomNav from "@/components/student/StudentBottomNav";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { prisma } from "@/lib/db/postgresql";
+import StudentLayoutClient from "./ClientLayout";
 
-export default function StudentLayout({
+export default async function StudentLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const pathname = usePathname();
+  const session = await getServerSession(authOptions);
   
-  // Hide sidebar on landing page and onboarding flow (unauthenticated views)
-  const isFullWidthPage = pathname === "/student" || pathname.startsWith("/student/onboarding");
-
-  // Full-width layout without sidebar for unauthenticated pages
-  if (isFullWidthPage) {
-    return <>{children}</>;
+  let profile = null;
+  if (session?.user?.email) {
+    // Try to find profile by User ID first, then Email if needed (though relation is via User ID)
+    // Auth session provides ID.
+    const userId = session.user.id;
+    if (userId) {
+        profile = await prisma.studentProfile.findUnique({
+            where: { userId: userId }
+        });
+    }
+    
+    // Fallback: If no userId in session (rare), look up User by email then Profile?
+    // Not needed if auth is working correctly.
   }
 
-  // Authenticated pages get sidebar layout
   return (
-    <div className="flex min-h-screen bg-background-light dark:bg-background-dark font-display">
-      {/* Desktop Sidebar */}
-      <StudentSidebar />
-
-      {/* Main Content Area */}
-      <main className="flex-1 w-full lg:pl-64 transition-all duration-300">
-        <div className="mx-auto w-full lg:max-w-7xl lg:px-8 lg:py-6">
-            {children}
-        </div>
-      </main>
-
-      {/* Mobile Bottom Nav */}
-      <StudentBottomNav />
-    </div>
+    <StudentLayoutClient user={session?.user} profile={profile}>
+      {children}
+    </StudentLayoutClient>
   );
 }

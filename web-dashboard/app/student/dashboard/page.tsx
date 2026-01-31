@@ -1,7 +1,40 @@
 import Link from "next/link";
 import React from "react";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+import { authOptions } from "@/lib/auth";
+import { prisma } from "@/lib/db/postgresql";
 
-export default function StudentDashboard() {
+export default async function StudentDashboard() {
+  const session = await getServerSession(authOptions);
+
+  if (!session || !session.user) {
+    redirect("/login");
+  }
+
+  // Fetch Student Profile
+  // We assume user.id is available in session (added via callbacks in auth.ts)
+  const userId = (session.user as any).id; 
+  
+  const profile = await prisma.studentProfile.findUnique({
+    where: { userId: userId },
+    include: {
+        // We might want to include related data later (e.g. applications)
+    }
+  });
+
+  // Strict Protection: If no profile, they must onboard.
+  if (!profile) {
+    redirect("/student/onboarding");
+  }
+
+  // Dynamic Data
+  const displayName = profile.fullName || session.user.name || "Student";
+  const displayImage = session.user.image || "https://lh3.googleusercontent.com/aida-public/AB6AXuD4WtBqU_RuyJyc2lpnJrtSS-1kov7Ts0i2nYIU-1ceH3p4mAC127fbn2UB3PrQeCTm65SkcRrB80OYRvpko2Jsa0OFT3obWcI29H3JGhl6_Kb4WGZxb5NJzF29Hn4BCan2KjhvfQPuOmogmOZoSy-qzdJltMCJl-Dz4qGmj3RLS10AkhrWhY9d6q8A1qKbvI-PGVH-NHYvn5meHetrrHmr6ZeXMan0cmWIuXR3KibC2_4ocEsOukON60z3nyu5AgI8KbPtXSV57gGl";
+  
+  // NOTE: Applications are mock for now as per requirement to focus on dynamic PROFILE data first.
+  // Real application fetching will be integrated with MongoDB later.
+
   return (
     <div className="bg-background-light dark:bg-background-dark text-[#0d141b] transition-colors duration-200 min-h-screen">
       <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden pb-12 bg-white dark:bg-background-dark">
@@ -14,7 +47,7 @@ export default function StudentDashboard() {
                 <img
                   alt="Student profile avatar"
                   className="h-full w-full object-cover"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4WtBqU_RuyJyc2lpnJrtSS-1kov7Ts0i2nYIU-1ceH3p4mAC127fbn2UB3PrQeCTm65SkcRrB80OYRvpko2Jsa0OFT3obWcI29H3JGhl6_Kb4WGZxb5NJzF29Hn4BCan2KjhvfQPuOmogmOZoSy-qzdJltMCJl-Dz4qGmj3RLS10AkhrWhY9d6q8A1qKbvI-PGVH-NHYvn5meHetrrHmr6ZeXMan0cmWIuXR3KibC2_4ocEsOukON60z3nyu5AgI8KbPtXSV57gGl"
+                  src={displayImage}
                 />
               </div>
               <div>
@@ -22,7 +55,7 @@ export default function StudentDashboard() {
                   Good Morning
                 </p>
                 <h2 className="text-xl font-bold leading-tight tracking-tight dark:text-white">
-                  Alex Johnson
+                  {displayName}
                 </h2>
               </div>
             </div>
@@ -93,8 +126,9 @@ export default function StudentDashboard() {
                   </div>
                 </div>
               </div>
-
-              {/* List Item: IBA */}
+              
+              {/* ... (Keeping other list items same structure but just one for brevity if I wanted, but standard keeps all) ... */}
+               {/* List Item: IBA */}
               <div className="mt-4 group active:scale-[0.98] transition-all cursor-pointer">
                 <div className="flex flex-col gap-4 rounded-xl border border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm hover:shadow-md transition-shadow">
                   <div className="flex items-start justify-between">
@@ -141,6 +175,7 @@ export default function StudentDashboard() {
                   </div>
                 </div>
               </div>
+
             </div>
 
             {/* Right Column: Next Steps & Tasks */}

@@ -4,10 +4,20 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 
-export default function StudentSidebar() {
+interface StudentSidebarProps {
+  user?: { name?: string | null; image?: string | null; email?: string | null } | null;
+  profile?: { fullName?: string | null; program?: string | null; educationLevel?: string | null } | null;
+}
+
+export default function StudentSidebar({ user, profile }: StudentSidebarProps) {
   const pathname = usePathname();
 
   const isActive = (path: string) => pathname === path || pathname.startsWith(`${path}/`);
+  
+  // Dynamic Data with Fallbacks
+  const displayName = profile?.fullName || user?.name || "Student";
+  const displayProgram = profile?.program || profile?.educationLevel || "Student";
+  const displayImage = user?.image || "https://lh3.googleusercontent.com/aida-public/AB6AXuD4WtBqU_RuyJyc2lpnJrtSS-1kov7Ts0i2nYIU-1ceH3p4mAC127fbn2UB3PrQeCTm65SkcRrB80OYRvpko2Jsa0OFT3obWcI29H3JGhl6_Kb4WGZxb5NJzF29Hn4BCan2KjhvfQPuOmogmOZoSy-qzdJltMCJl-Dz4qGmj3RLS10AkhrWhY9d6q8A1qKbvI-PGVH-NHYvn5meHetrrHmr6ZeXMan0cmWIuXR3KibC2_4ocEsOukON60z3nyu5AgI8KbPtXSV57gGl";
 
   return (
     <aside className="fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-[#1e2130] border-r border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 flex flex-col h-full shrink-0 transition-transform duration-300 hidden lg:flex">
@@ -41,7 +51,7 @@ export default function StudentSidebar() {
           </span>
           <span className="text-sm font-medium">Dashboard</span>
         </Link>
-
+        
         {/* Discover */}
         <Link
           href="/student/discover"
@@ -133,11 +143,11 @@ export default function StudentSidebar() {
         <Link href="/student/profile" className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
           <div className="size-9 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
              {/* eslint-disable-next-line @next/next/no-img-element */}
-             <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4WtBqU_RuyJyc2lpnJrtSS-1kov7Ts0i2nYIU-1ceH3p4mAC127fbn2UB3PrQeCTm65SkcRrB80OYRvpko2Jsa0OFT3obWcI29H3JGhl6_Kb4WGZxb5NJzF29Hn4BCan2KjhvfQPuOmogmOZoSy-qzdJltMCJl-Dz4qGmj3RLS10AkhrWhY9d6q8A1qKbvI-PGVH-NHYvn5meHetrrHmr6ZeXMan0cmWIuXR3KibC2_4ocEsOukON60z3nyu5AgI8KbPtXSV57gGl" alt="User" className="w-full h-full object-cover" />
+             <img src={displayImage} alt="User" className="w-full h-full object-cover" />
           </div>
           <div className="flex flex-col">
-            <p className="text-[#0d101b] dark:text-white text-sm font-medium">Raza Naqvi</p>
-            <p className="text-slate-500 text-xs">Pre-Engineering</p>
+            <p className="text-[#0d101b] dark:text-white text-sm font-medium truncate max-w-[140px]">{displayName}</p>
+            <p className="text-slate-500 text-xs truncate max-w-[140px]">{displayProgram}</p>
           </div>
         </Link>
       </div>
