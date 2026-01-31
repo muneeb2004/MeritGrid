@@ -47,7 +47,7 @@ export default function ForgotPasswordPage() {
               We have sent a password reset link to <span className="font-semibold text-[#0d101b] dark:text-white">{email}</span>
             </p>
             <Link
-              href="/login"
+              href="/student/login"
               className="inline-flex items-center justify-center w-full py-3 px-4 rounded-xl bg-primary hover:bg-primary-dark text-white font-semibold transition-colors"
             >
               Back to Login

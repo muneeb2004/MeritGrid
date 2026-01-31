@@ -130,7 +130,7 @@ export default function OrgLoginPage() {
           </p>
 
           <div className="mt-8 pt-8 border-t border-slate-100 dark:border-slate-800 text-center">
-            <Link href="/login" className="text-xs text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors">
+            <Link href="/student/login" className="text-xs text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors">
                Looking for Student Login?
             </Link>
           </div>

@@ -9,7 +9,7 @@ export default async function StudentDashboard() {
   const session = await getServerSession(authOptions);
 
   if (!session || !session.user) {
-    redirect("/login");
+    redirect("/student/login");
   }
 
   // Fetch Student Profile
