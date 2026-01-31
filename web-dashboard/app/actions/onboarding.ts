@@ -10,6 +10,7 @@
  */
 
 import { z } from "zod";
+import { hash } from "bcryptjs";
 
 
 // =============================================================================
@@ -23,6 +24,8 @@ import { z } from "zod";
 const OnboardingSchema = z.object({
   // Step 1: Personal Identity
   fullName: z.string().min(1, "Full name is required"),
+  username: z.string().min(3, "Username must be at least 3 characters").max(20, "Username must be max 20 characters").regex(/^[a-zA-Z0-9_]+$/, "Username can only contain letters, numbers, and underscores"),
+  password: z.string().min(8, "Password must be at least 8 characters"),
   nationality: z.enum(["national", "foreign"]),
   countryCode: z.string(),
   phone: z.string().min(1, "Phone number is required"),
@@ -84,14 +87,14 @@ export async function saveStudentOnboarding(
     // ---------------------------------------------------------------------------
     // DEVELOPMENT FALLBACK
     // ---------------------------------------------------------------------------
-    // In development mode, log data and return success without DB connection.
-    // This follows the project's hybrid fetching pattern from GEMINI.md.
-    if (process.env.NODE_ENV === "development") {
+    // Disabled to allow testing of Real DB Registration flow
+    if (false && process.env.NODE_ENV === "development") {
       console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
       console.log("📝 DEMO MODE: Student onboarding data received");
       console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
       console.log("👤 Personal:", {
         fullName: validated.fullName,
+        username: validated.username,
         email: validated.email,
         phone: `${validated.countryCode} ${validated.phone}`,
         gender: validated.gender,
@@ -134,6 +137,8 @@ export async function saveStudentOnboarding(
       where: { email: validated.email },
       create: {
         email: validated.email,
+        username: validated.username,
+        password: await hash(validated.password, 10),
         name: validated.fullName,
         role: "STUDENT",
         studentProfile: {
@@ -161,6 +166,10 @@ export async function saveStudentOnboarding(
       },
       update: {
         name: validated.fullName,
+        username: validated.username,
+        // Update password if provided, or keep existing? 
+        // For onboarding, we assume setting it up.
+        password: await hash(validated.password, 10),
         studentProfile: {
           upsert: {
             create: {
@@ -214,6 +223,19 @@ export async function saveStudentOnboarding(
       userId: result.id,
     };
   } catch (error) {
+    // Handle Prisma Unique Constraint Violation
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    if ((error as any).code === "P2002") {
+        const target = (error as any).meta?.target as string[];
+        if (target && target.includes("username")) {
+            return { success: false, error: "Username is already taken" };
+        }
+        if (target && target.includes("email")) {
+            return { success: false, error: "Email is already registered" };
+        }
+        return { success: false, error: "Username or Email already exists" };
+    }
+
     // Handle Zod validation errors
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if (error instanceof z.ZodError || (error as any).errors) {

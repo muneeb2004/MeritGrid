@@ -26,6 +26,8 @@ const STORAGE_KEY = "meritgrid_onboarding";
 interface OnboardingData {
   // Step 1: Personal Identity
   fullName: string;
+  username: string; // [NEW]
+  password: string; // [NEW]
   nationality: "national" | "foreign";
   countryCode: string;
   phone: string;
@@ -50,6 +52,8 @@ interface OnboardingData {
 
 const initialData: OnboardingData = {
   fullName: "",
+  username: "",
+  password: "",
   nationality: "national",
   countryCode: "+92",
   phone: "",
@@ -136,6 +140,12 @@ export default function OnboardingPage() {
 
     if (step === 1) {
       if (!data.fullName.trim()) newErrors.fullName = "Full name is required";
+      if (!data.username.trim()) newErrors.username = "Username is required";
+      else if (data.username.length < 3) newErrors.username = "Username must be 3+ chars";
+      
+      if (!data.password) newErrors.password = "Password is required";
+      else if (data.password.length < 8) newErrors.password = "Password must be 8+ chars";
+
       if (!data.phone.trim()) newErrors.phone = "Phone number is required";
       if (!data.email.trim()) newErrors.email = "Email is required";
       else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) newErrors.email = "Invalid email";
@@ -261,6 +271,26 @@ export default function OnboardingPage() {
                 required
                 error={errors.fullName}
               />
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Input
+                    label="Username (Unique ID)"
+                    value={data.username}
+                    onChange={(e) => updateField("username", e.target.value)}
+                    placeholder="e.g. muneeb_alien"
+                    required
+                    error={errors.username}
+                />
+                <Input
+                    label="Password"
+                    type="password"
+                    value={data.password}
+                    onChange={(e) => updateField("password", e.target.value)}
+                    placeholder="Min 8 characters"
+                    required
+                    error={errors.password}
+                />
+              </div>
 
               <Toggle
                 label="Nationality"
