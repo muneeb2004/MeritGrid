@@ -32,6 +32,7 @@ interface OnboardingData {
   gender: string;
   // Step 2: Geographic Details
   address: string;
+  society: string;
   street: string;
   country: string;
   province: string;
@@ -53,6 +54,7 @@ const initialData: OnboardingData = {
   email: "",
   gender: "",
   address: "",
+  society: "",
   street: "",
   country: "PK",
   province: "",
@@ -127,6 +129,7 @@ export default function OnboardingPage() {
 
     if (step === 2) {
       if (!data.address.trim()) newErrors.address = "Address is required";
+      if (!data.society.trim()) newErrors.society = "Society/Apartment name is required";
       if (!data.province) newErrors.province = "Province is required";
       if (!data.city) newErrors.city = "City is required";
     }
@@ -295,6 +298,15 @@ export default function OnboardingPage() {
                 placeholder="e.g., House 123, Block A"
                 required
                 error={errors.address}
+              />
+
+              <Input
+                label="Apartments/Society Name"
+                value={data.society}
+                onChange={(e) => updateField("society", e.target.value)}
+                placeholder="e.g., Creek Vistas, Bahria Town"
+                required
+                error={errors.society}
               />
 
               <Input
