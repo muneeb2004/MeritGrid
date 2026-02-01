@@ -1,10 +1,115 @@
 import Link from "next/link";
 import React from "react";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+import { authOptions } from "@/lib/auth";
+import { prisma } from "@/lib/db/postgresql";
 
-export default function ProfilePage() {
+// Mandatory fields for profile completion
+const MANDATORY_FIELDS = ["fullName", "phone", "educationLevel", "city"] as const;
+
+// Calculate profile strength based on filled fields
+function calculateProfileStrength(profile: Record<string, unknown> | null): number {
+  if (!profile) return 0;
+  
+  const fields = [
+    "fullName", "nationality", "phone", "gender",
+    "address", "city", "province", "country",
+    "educationLevel", "institution", "program",
+    "gpa", "bio"
+  ];
+  
+  let filled = 0;
+  for (const field of fields) {
+    const value = profile[field as keyof typeof profile];
+    if (value !== null && value !== undefined && value !== "") {
+      filled++;
+    }
+  }
+  
+  return Math.round((filled / fields.length) * 100);
+}
+
+// Check which mandatory fields are missing
+function getMissingMandatoryFields(profile: Record<string, unknown> | null): string[] {
+  if (!profile) return [...MANDATORY_FIELDS];
+  
+  return MANDATORY_FIELDS.filter(field => {
+    const value = profile[field as keyof typeof profile];
+    return value === null || value === undefined || value === "";
+  });
+}
+
+export default async function ProfilePage() {
+  const session = await getServerSession(authOptions);
+
+  if (!session || !session.user) {
+    redirect("/student/login");
+  }
+
+  const userId = (session.user as any).id;
+  
+  // Fetch profile data
+  const profile = await prisma.studentProfile.findUnique({
+    where: { userId: userId },
+    include: { user: true }
+  });
+
+  if (!profile) {
+    redirect("/student/onboarding");
+  }
+
+  // Calculate profile metrics
+  const profileStrength = calculateProfileStrength(profile as unknown as Record<string, unknown>);
+  const missingFields = getMissingMandatoryFields(profile as unknown as Record<string, unknown>);
+  const hasMissingFields = missingFields.length > 0;
+
+  // Dynamic data with fallbacks
+  const displayName = profile.fullName || profile.user.name || "Student";
+  const displayImage = profile.user.image || "https://lh3.googleusercontent.com/aida-public/AB6AXuCax_fM1ybwOTFzqVoC0P5939ggwx7G5s_TQZ2Aw1eOS3asPgsasUoK1noYPHx_TRwwND0xSubTFjBjW35ulAfbIByRGQGUszOZl4PGiUFc9WGpjf6TBWBnSyIhVTocTh7u8jA4l5okXm3JayngofacfR1exHrPriT08U7nkN1kjF-Gv5f9esP4hfFwM34XKoWnu3Jky1dwSQOlt2XP39cmrKCHnqpVLICWN0z3VJpco9fZYYurbvdNiEpxg2SBt-8nsMiocP0o7wU";
+  const displayProgram = profile.program || profile.educationLevel || "Student";
+  const displayLocation = profile.city && profile.province 
+    ? `${profile.city}, ${profile.province}` 
+    : profile.city || profile.province || "Not specified";
+  const displayBio = profile.bio || "No personal statement added yet.";
+  const displayPhone = profile.phone || "Not added";
+  const displayGender = profile.gender || "Not specified";
+
+  // Field label mapping for missing fields alert
+  const fieldLabels: Record<string, string> = {
+    fullName: "Full Name",
+    phone: "Phone Number",
+    educationLevel: "Education Level",
+    city: "City"
+  };
+
   return (
     <div className="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        {/* Missing Fields Alert */}
+        {hasMissingFields && (
+          <div className="mb-6 p-4 rounded-xl bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <div className="flex items-center gap-3 flex-1">
+              <div className="size-10 bg-amber-100 dark:bg-amber-800/50 rounded-full flex items-center justify-center shrink-0">
+                <span className="material-symbols-outlined text-amber-600 dark:text-amber-400">warning</span>
+              </div>
+              <div>
+                <h3 className="text-sm font-bold text-amber-800 dark:text-amber-200">Complete Your Profile</h3>
+                <p className="text-xs text-amber-700 dark:text-amber-300">
+                  Missing: {missingFields.map(f => fieldLabels[f]).join(", ")}. Complete your profile to unlock all features.
+                </p>
+              </div>
+            </div>
+            <Link 
+              href="/student/onboarding"
+              className="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white font-bold text-sm rounded-lg transition-colors shrink-0"
+            >
+              Complete Now
+            </Link>
+          </div>
+        )}
+
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar Navigation (Secondary) */}
           <aside className="w-full lg:w-64 flex-shrink-0">
@@ -61,8 +166,7 @@ export default function ProfilePage() {
                   <div
                     className="h-28 w-28 rounded-full border-4 border-white dark:border-slate-800 shadow-lg bg-cover bg-center"
                     style={{
-                      backgroundImage:
-                        "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCax_fM1ybwOTFzqVoC0P5939ggwx7G5s_TQZ2Aw1eOS3asPgsasUoK1noYPHx_TRwwND0xSubTFjBjW35ulAfbIByRGQGUszOZl4PGiUFc9WGpjf6TBWBnSyIhVTocTh7u8jA4l5okXm3JayngofacfR1exHrPriT08U7nkN1kjF-Gv5f9esP4hfFwM34XKoWnu3Jky1dwSQOlt2XP39cmrKCHnqpVLICWN0z3VJpco9fZYYurbvdNiEpxg2SBt-8nsMiocP0o7wU')",
+                      backgroundImage: `url('${displayImage}')`,
                     }}
                   ></div>
                   <button className="absolute bottom-0 right-0 bg-primary text-white p-1.5 rounded-full border-2 border-white dark:border-slate-800 shadow-md cursor-pointer">
@@ -75,19 +179,22 @@ export default function ProfilePage() {
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
                       <h2 className="text-2xl font-bold text-[#101622] dark:text-white">
-                        Alex Johnson
+                        {displayName}
                       </h2>
                       <p className="text-slate-500 font-medium">
-                        Undergraduate Applicant • Fall 2024
+                        {displayProgram} Applicant
                       </p>
                     </div>
                     <div className="flex gap-3 justify-center">
                       <button className="px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold text-sm rounded-lg transition-all cursor-pointer">
                         Preview Profile
                       </button>
-                      <button className="px-4 py-2 bg-primary text-white font-bold text-sm rounded-lg shadow-sm hover:shadow-md transition-all cursor-pointer">
+                      <Link 
+                        href="/student/onboarding"
+                        className="px-4 py-2 bg-primary text-white font-bold text-sm rounded-lg shadow-sm hover:shadow-md transition-all cursor-pointer"
+                      >
                         Edit Master Info
-                      </button>
+                      </Link>
                     </div>
                   </div>
                   <div className="mt-4 flex flex-wrap justify-center sm:justify-start gap-6 border-t border-slate-100 dark:border-slate-800 pt-4">
@@ -98,12 +205,12 @@ export default function ProfilePage() {
                       <div className="flex items-center gap-2">
                         <div className="h-2 w-24 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
                           <div
-                            className="h-full bg-primary"
-                            style={{ width: "85%" }}
+                            className={`h-full ${profileStrength >= 80 ? 'bg-green-500' : profileStrength >= 50 ? 'bg-amber-500' : 'bg-red-500'}`}
+                            style={{ width: `${profileStrength}%` }}
                           ></div>
                         </div>
-                        <span className="text-xs font-bold text-primary">
-                          85%
+                        <span className={`text-xs font-bold ${profileStrength >= 80 ? 'text-green-600' : profileStrength >= 50 ? 'text-amber-600' : 'text-red-600'}`}>
+                          {profileStrength}%
                         </span>
                       </div>
                     </div>
@@ -111,8 +218,12 @@ export default function ProfilePage() {
                       <p className="text-[10px] uppercase tracking-wider text-slate-400 font-bold mb-1">
                         Status
                       </p>
-                      <span className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-green-100 text-green-700">
-                        Verified
+                      <span className={`inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold ${
+                        profile.onboardingCompletedAt 
+                          ? 'bg-green-100 text-green-700' 
+                          : 'bg-amber-100 text-amber-700'
+                      }`}>
+                        {profile.onboardingCompletedAt ? 'Verified' : 'Pending'}
                       </span>
                     </div>
                     <div>
@@ -120,13 +231,51 @@ export default function ProfilePage() {
                         Location
                       </p>
                       <p className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-                        San Francisco, CA
+                        {displayLocation}
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+
+            {/* Personal Info Section */}
+            <section className="bg-white dark:bg-[#101622] rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800">
+              <div className="bg-[#101622] px-6 py-4 flex justify-between items-center">
+                <h3 className="text-white font-bold tracking-tight flex items-center gap-2">
+                  <span className="material-symbols-outlined !text-lg text-primary">
+                    person
+                  </span>
+                  Personal Information
+                </h3>
+              </div>
+              <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <p className="text-[10px] uppercase tracking-wider text-slate-400 font-bold mb-1">Full Name</p>
+                  <p className="text-sm font-semibold text-slate-800 dark:text-white">{displayName}</p>
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase tracking-wider text-slate-400 font-bold mb-1">Email</p>
+                  <p className="text-sm font-semibold text-slate-800 dark:text-white">{profile.user.email || "Not added"}</p>
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase tracking-wider text-slate-400 font-bold mb-1">Phone</p>
+                  <p className="text-sm font-semibold text-slate-800 dark:text-white">{displayPhone}</p>
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase tracking-wider text-slate-400 font-bold mb-1">Gender</p>
+                  <p className="text-sm font-semibold text-slate-800 dark:text-white capitalize">{displayGender}</p>
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase tracking-wider text-slate-400 font-bold mb-1">Nationality</p>
+                  <p className="text-sm font-semibold text-slate-800 dark:text-white capitalize">{profile.nationality || "Not specified"}</p>
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase tracking-wider text-slate-400 font-bold mb-1">Address</p>
+                  <p className="text-sm font-semibold text-slate-800 dark:text-white">{profile.address || "Not added"}</p>
+                </div>
+              </div>
+            </section>
 
             {/* Academics Section */}
             <section className="bg-white dark:bg-[#101622] rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800">
@@ -135,145 +284,25 @@ export default function ProfilePage() {
                   <span className="material-symbols-outlined !text-lg text-primary">
                     school
                   </span>
-                  Academics
-                </h3>
-                <button className="text-white/70 hover:text-white flex items-center gap-1 text-xs font-bold transition-colors cursor-pointer">
-                  <span className="material-symbols-outlined !text-sm">
-                    add_circle
-                  </span>
-                  Add Entry
-                </button>
-              </div>
-              <div className="p-0 overflow-x-auto">
-                <table className="w-full text-sm text-left border-collapse">
-                  <thead>
-                    <tr className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 font-semibold border-b border-slate-100 dark:border-slate-800">
-                      <th className="px-6 py-4">Subject</th>
-                      <th className="px-6 py-4">Grade</th>
-                      <th className="px-6 py-4">Credits</th>
-                      <th className="px-6 py-4">Year</th>
-                      <th className="px-6 py-4 text-right">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
-                    <tr className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
-                      <td className="px-6 py-4 font-semibold text-slate-800 dark:text-slate-200">
-                        Advanced Mathematics
-                      </td>
-                      <td className="px-6 py-4">
-                        <span className="inline-block px-2.5 py-1 bg-primary/10 text-primary font-bold rounded">
-                          A
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 text-slate-500">4.0</td>
-                      <td className="px-6 py-4 text-slate-500">2023</td>
-                      <td className="px-6 py-4 text-right">
-                        <button className="text-slate-400 hover:text-primary transition-colors cursor-pointer">
-                          <span className="material-symbols-outlined !text-lg">
-                            edit
-                          </span>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
-                      <td className="px-6 py-4 font-semibold text-slate-800 dark:text-slate-200">
-                        Quantum Physics
-                      </td>
-                      <td className="px-6 py-4">
-                        <span className="inline-block px-2.5 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold rounded">
-                          A-
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 text-slate-500">3.5</td>
-                      <td className="px-6 py-4 text-slate-500">2023</td>
-                      <td className="px-6 py-4 text-right">
-                        <button className="text-slate-400 hover:text-primary transition-colors cursor-pointer">
-                          <span className="material-symbols-outlined !text-lg">
-                            edit
-                          </span>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
-                      <td className="px-6 py-4 font-semibold text-slate-800 dark:text-slate-200">
-                        Computer Science I
-                      </td>
-                      <td className="px-6 py-4">
-                        <span className="inline-block px-2.5 py-1 bg-primary/10 text-primary font-bold rounded">
-                          A+
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 text-slate-500">4.0</td>
-                      <td className="px-6 py-4 text-slate-500">2023</td>
-                      <td className="px-6 py-4 text-right">
-                        <button className="text-slate-400 hover:text-primary transition-colors cursor-pointer">
-                          <span className="material-symbols-outlined !text-lg">
-                            edit
-                          </span>
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </section>
-
-            {/* Documents Section */}
-            <section className="bg-white dark:bg-[#101622] rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800">
-              <div className="bg-[#101622] px-6 py-4 flex justify-between items-center">
-                <h3 className="text-white font-bold tracking-tight flex items-center gap-2">
-                  <span className="material-symbols-outlined !text-lg text-primary">
-                    description
-                  </span>
-                  Documents
+                  Academic Information
                 </h3>
               </div>
-              <div className="p-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {/* Document Card */}
-                  <div className="flex items-center gap-4 p-4 rounded-xl border-2 border-slate-100 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-800/20">
-                    <div className="bg-white dark:bg-slate-800 p-3 rounded-lg shadow-sm">
-                      <span className="material-symbols-outlined !text-3xl text-primary">
-                        picture_as_pdf
-                      </span>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2">
-                        <p className="text-sm font-bold text-slate-800 dark:text-white truncate">
-                          Grade_Sheet.pdf
-                        </p>
-                        <span className="material-symbols-outlined !text-sm text-green-500 bg-green-50 rounded-full">
-                          check_circle
-                        </span>
-                      </div>
-                      <p className="text-xs text-slate-500">
-                        Uploaded on Oct 12, 2023 • 2.4 MB
-                      </p>
-                    </div>
-                    <div className="flex flex-col gap-1">
-                      <button className="p-1.5 text-slate-400 hover:text-primary transition-colors cursor-pointer">
-                        <span className="material-symbols-outlined !text-xl">
-                          visibility
-                        </span>
-                      </button>
-                      <button className="p-1.5 text-slate-400 hover:text-red-500 transition-colors cursor-pointer">
-                        <span className="material-symbols-outlined !text-xl">
-                          delete
-                        </span>
-                      </button>
-                    </div>
-                  </div>
-                  {/* Upload Empty State / Trigger */}
-                  <div className="flex items-center justify-center gap-4 p-4 rounded-xl border-2 border-dashed border-slate-200 dark:border-slate-800 hover:border-primary/50 cursor-pointer group transition-colors">
-                    <div className="text-center">
-                      <span className="material-symbols-outlined !text-2xl text-slate-300 group-hover:text-primary transition-colors">
-                        upload_file
-                      </span>
-                      <p className="text-xs font-bold text-slate-400 group-hover:text-primary transition-colors mt-1">
-                        Upload New Document
-                      </p>
-                    </div>
-                  </div>
+              <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <p className="text-[10px] uppercase tracking-wider text-slate-400 font-bold mb-1">Education Level</p>
+                  <p className="text-sm font-semibold text-slate-800 dark:text-white">{profile.educationLevel || "Not specified"}</p>
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase tracking-wider text-slate-400 font-bold mb-1">Institution</p>
+                  <p className="text-sm font-semibold text-slate-800 dark:text-white">{profile.institution || profile.customInstitution || "Not specified"}</p>
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase tracking-wider text-slate-400 font-bold mb-1">Program</p>
+                  <p className="text-sm font-semibold text-slate-800 dark:text-white">{profile.program || "Not specified"}</p>
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase tracking-wider text-slate-400 font-bold mb-1">GPA</p>
+                  <p className="text-sm font-semibold text-slate-800 dark:text-white">{profile.gpa ? profile.gpa.toFixed(2) : "Not added"}</p>
                 </div>
               </div>
             </section>
@@ -296,58 +325,37 @@ export default function ProfilePage() {
               <div className="p-6">
                 <div className="prose prose-sm dark:prose-invert max-w-none">
                   <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
-                    Ever since I wrote my first line of code in Python at the
-                    age of twelve, I have been fascinated by the intersection of
-                    logic and creativity. My journey through secondary school
-                    has been defined by a deep-seated curiosity about how
-                    complex algorithms can solve real-world problems. Whether
-                    it&apos;s developing a simple script to automate my study
-                    schedule or competing in regional math olympiads, I&apos;ve
-                    always pushed the boundaries of my understanding...
+                    {displayBio}
                   </p>
-                  <button className="mt-4 text-primary font-bold text-sm hover:underline inline-flex items-center gap-1 cursor-pointer">
-                    Read more
-                    <span className="material-symbols-outlined !text-xs">
-                      arrow_forward_ios
-                    </span>
-                  </button>
                 </div>
               </div>
             </section>
 
-            {/* Experience Section */}
-            <section className="bg-white dark:bg-[#101622] rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800">
-              <div className="bg-[#101622] px-6 py-4 flex justify-between items-center">
-                <h3 className="text-white font-bold tracking-tight flex items-center gap-2">
-                  <span className="material-symbols-outlined !text-lg text-primary">
-                    work
-                  </span>
-                  Experience
-                </h3>
-              </div>
-              <div className="p-6 space-y-4">
-                <div className="flex gap-4 items-start">
-                  <div className="bg-slate-100 dark:bg-slate-800 p-2.5 rounded-lg">
-                    <span className="material-symbols-outlined text-slate-400">
-                      code
+            {/* Interests Section */}
+            {profile.interests && profile.interests.length > 0 && (
+              <section className="bg-white dark:bg-[#101622] rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800">
+                <div className="bg-[#101622] px-6 py-4">
+                  <h3 className="text-white font-bold tracking-tight flex items-center gap-2">
+                    <span className="material-symbols-outlined !text-lg text-primary">
+                      interests
                     </span>
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-slate-800 dark:text-white">
-                      Software Engineering Intern
-                    </h4>
-                    <p className="text-xs text-primary font-semibold">
-                      TechFlow Solutions • Jun 2023 - Aug 2023
-                    </p>
-                    <p className="text-xs text-slate-500 mt-2 line-clamp-2">
-                      Assisted in the development of a microservices-based
-                      architecture for a cloud-native logistics application
-                      using Node.js and AWS.
-                    </p>
+                    Interests
+                  </h3>
+                </div>
+                <div className="p-6">
+                  <div className="flex flex-wrap gap-2">
+                    {profile.interests.map((interest, index) => (
+                      <span 
+                        key={index}
+                        className="px-3 py-1.5 bg-primary/10 text-primary text-sm font-semibold rounded-full"
+                      >
+                        {interest}
+                      </span>
+                    ))}
                   </div>
                 </div>
-              </div>
-            </section>
+              </section>
+            )}
           </div>
         </div>
       </div>
